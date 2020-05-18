@@ -13,7 +13,7 @@ public class Main extends PApplet {
 
 	public void settings() {
 		size(800,500);
-		
+		//odio esto :(
 		
 	}
 	
