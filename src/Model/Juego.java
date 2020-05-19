@@ -1,5 +1,7 @@
 package Model;
 
+import controlP5.ControlP5;
+import controlP5.Textfield;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -8,6 +10,9 @@ public class Juego {
 	PApplet app;
 	PImage pantInicio, inicioBlanco, pantRegistro, pantLab, pantElige, 
 		   pantCampo, pantBatalla, pantPokedex;
+	
+	ControlP5 control;
+	Textfield nombre;
 	
 	int pantalla;
 	
@@ -22,7 +27,10 @@ public class Juego {
 		pantBatalla= app.loadImage("images/batalla.png");
 		pantPokedex= app.loadImage("images/pokedex.png");
 		
-		pantalla = 0;
+		pantalla = 1;
+		
+		
+		
 	
 	}
 	
