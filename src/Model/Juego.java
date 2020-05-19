@@ -24,7 +24,7 @@ public class Juego {
 		pantBatalla= app.loadImage("images/batalla.png");
 		pantPokedex= app.loadImage("images/pokedex.png");
 		
-		pantalla = 2;
+		pantalla = 0;
 	
 	}
 	
@@ -61,6 +61,7 @@ public class Juego {
 		case 4: 
 			//inicio
 			app.image(pantCampo,0,0,800,500);
+			
 			
 			break;
 		case 5:
