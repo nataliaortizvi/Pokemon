@@ -27,7 +27,7 @@ public class Juego {
 		pantBatalla= app.loadImage("images/batalla.png");
 		pantPokedex= app.loadImage("images/pokedex.png");
 		
-		pantalla = 1;
+		pantalla = 2;
 		
 		
 		
