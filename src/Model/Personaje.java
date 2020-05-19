@@ -1,16 +1,18 @@
 package Model;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public abstract class Personaje {
 	
 	String nom;
-	private int posX;
-	private int posY;
-	private int fecha;
-	private int vel;
-	private int tam;
-	private PApplet app;
+	public int posX;
+	public int posY;
+	public int fecha;
+	public int vel;
+	public int tam;
+	public PApplet app;
+
 	
 	public Personaje (int posX, int posY, int tam, PApplet app) {
 		this.posX = posX;
