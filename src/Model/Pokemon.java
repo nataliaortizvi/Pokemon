@@ -27,8 +27,7 @@ public abstract class Pokemon {
 		
 	}
 	
-	public void daño() {
-		
+	public void danio() {
 	}
 
 }
