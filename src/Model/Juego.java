@@ -6,6 +6,7 @@ import processing.core.PImage;
 public class Juego {
 	
 	PApplet app;
+	Bueno perso;
 	PImage pantInicio, inicioBlanco, pantRegistro, pantLab, pantElige, 
 		   pantCampo, pantBatalla, pantPokedex;
 	
@@ -13,6 +14,7 @@ public class Juego {
 	
 	public Juego(PApplet app) {
 		this.app = app;
+		perso = new Bueno("hey",400,400,50,app);
 		pantInicio= app.loadImage("images/inicio.png");
 		inicioBlanco= app.loadImage("images/inicioBlanco.png");
 		pantRegistro= app.loadImage("images/registro.png");
@@ -22,7 +24,7 @@ public class Juego {
 		pantBatalla= app.loadImage("images/batalla.png");
 		pantPokedex= app.loadImage("images/pokedex.png");
 		
-		pantalla = 0;
+		pantalla = 2;
 	
 	}
 	
@@ -46,6 +48,9 @@ public class Juego {
 		case 2:
 			//inicio
 			app.image(pantLab,0,0,800,500);
+			
+			perso.pintar();
+			
 			
 			break;
 		case 3:
