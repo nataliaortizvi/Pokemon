@@ -3,23 +3,31 @@ package Model;
 import controlP5.ControlP5;
 import controlP5.Textfield;
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.core.PImage;
 
 public class Juego {
 	
 	PApplet app;
-	PImage pantInicio, inicioBlanco, pantRegistro, pantLab, pantElige, 
+	Bueno perso;
+	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige, 
 		   pantCampo, pantBatalla, pantPokedex;
 	
 	ControlP5 control;
 	Textfield nombre;
+	PFont font;
 	
 	int pantalla;
 	
 	public Juego(PApplet app) {
 		this.app = app;
+		perso = new Bueno("hey",400,400,50,app);
+		
+		//imagenes
 		pantInicio= app.loadImage("images/inicio.png");
 		inicioBlanco= app.loadImage("images/inicioBlanco.png");
+		inicioR= app.loadImage("images/iniciarRegistro.png");
+		
 		pantRegistro= app.loadImage("images/registro.png");
 		pantLab= app.loadImage("images/laboratorio.png");
 		pantElige= app.loadImage("images/elige0.png");
@@ -27,11 +35,21 @@ public class Juego {
 		pantBatalla= app.loadImage("images/batalla.png");
 		pantPokedex= app.loadImage("images/pokedex.png");
 		
-		pantalla = 2;
+		pantalla = 0;
 		
-		
-		
+		//cosas de registro
+		control = new ControlP5(app);
+		font = app.createFont ("arial", 27);
 	
+		nombre = control.addTextfield("")
+				.setPosition(85,201)
+				.setSize(297,69)
+				.setColor(app.color(255))
+				.setColorBackground(app.color(25,25,25,5))
+				.setColorCaptionLabel(app.color(255))
+				.setFont(font)
+				;
+		
 	}
 	
 	//metodos
@@ -40,6 +58,7 @@ public class Juego {
 		case 0:
 			//inicio
 			app.image(pantInicio,0,0,800,500);
+			nombre.hide();
 
 			if(app.mouseX > 247 && app.mouseX < 551 && app.mouseY > 414 && app.mouseY < 457) {
 				app.image(inicioBlanco,230,407,340,50);
@@ -47,32 +66,43 @@ public class Juego {
 			
 			break;
 		case 1:
-			//inicio
+			//registro
 			app.image(pantRegistro,0,0,800,500);
+			nombre.show();
+			
+			if(app.mouseX > 178 && app.mouseX < 295 && app.mouseY > 312 && app.mouseY < 355) {
+				app.image(inicioR,175,305,140,50);
+			}
+			
+			
 			
 			break;
 		case 2:
-			//inicio
+			//lab
 			app.image(pantLab,0,0,800,500);
+			nombre.hide();
+			
+			perso.pintar();
+			
 			
 			break;
 		case 3:
-			//inicio
+			//elige
 			app.image(pantElige,0,0,800,500);
 			
 			break;
 		case 4: 
-			//inicio
+			//campo
 			app.image(pantCampo,0,0,800,500);
 			
 			break;
 		case 5:
-			//inicio
+			//batalla
 			app.image(pantBatalla,0,0,800,500);
 			
 			break;
 		case 6:
-			//inicio
+			//pokedex
 			app.image(pantPokedex,0,0,800,500);
 			
 			break;
@@ -94,32 +124,39 @@ public class Juego {
 			
 			break;
 		case 1:
-			//inicio
+			//registro
+			if(app.mouseX > 178 && app.mouseX < 295 && app.mouseY > 312 && app.mouseY < 355) {
+				pantalla ++;
+			}
 			
 			break;
 		case 2:
-			//inicio
+			//lab
 			
 			break;
 		case 3:
-			//inicio
+			//escoge
 			
 			break;
 		case 4: 
-			//inicio
+			//campo
 			
 			break;
 		case 5:
-			//inicio
+			//batalla
 			
 			break;
 		case 6:
-			//inicio
+			//pokedex
 			
 			break;
 		}
 		
 	}
+	
+	
+	
+	
 	
 	
 	

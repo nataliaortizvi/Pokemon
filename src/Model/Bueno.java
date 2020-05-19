@@ -25,7 +25,7 @@ public class Bueno extends Personaje {
 	
 	public void pintar () {
 		switch(cambiar){
-		case 1: app.image(perFrente,posX,posY,100,50);
+		case 1: app.image(perFrente,posX,posY,50,100);
 		break;
 		case 2: app.image(perBack,posX,posY,100,50);
 		break;
