@@ -7,24 +7,24 @@ public class PokemonTwo extends Pokemon{
 	
 	private int posicion = 0;
 	
-	PImage evvyFrente;
-	PImage evvyBack;
+	PImage squirtleFrente;
+	PImage squirtleBack;
 	
 	public PokemonTwo(int posX, int posY, PApplet app) {
 		super(posX, posY, app);
 		
-		evvyFrente = app.loadImage("images/evvy.png");
-		evvyBack = app.loadImage("images/evvyBack");
+		squirtleFrente = app.loadImage("images/squirtle.png");
+		squirtleBack = app.loadImage("images/squirtleBack.png");
 		
 	}
 	
 	public void pintar() {
 		switch (posicion) {
 		case 0:
-			app.image(evvyFrente, 200, 100);
+			app.image(squirtleFrente, 200, 100);
 			break;
 		case 1:
-			app.image(evvyBack, 200, 200);
+			app.image(squirtleBack, 200, 200);
 			break;
 		}
 	}
