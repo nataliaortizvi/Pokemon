@@ -132,8 +132,8 @@ public class Juego {
 			nombre.hide();
 			if(app.mouseX > 360 && app.mouseX < 480 && app.mouseY > 195 && app.mouseY <260) {
 				app.image(pokebolita,350,195,50,50);
-				app.image(pokebolita,353+48,195,50,50);
-				app.image(pokebolita,353+48+48,195,50,50);
+				app.image(pokebolita,353+45,195,50,50);
+				app.image(pokebolita,353+45+45,195,50,50);
 			}
 			
 			perso.pintar();
@@ -259,9 +259,11 @@ public class Juego {
 				pokeelige = true;
 			}
 			
+			if(app.mouseX > 573 && app.mouseX < 740 && app.mouseY > 415 && app.mouseY <478) {
+				pantalla = 2;
+			}
 			
-			
-			if(app.mouseX > 384 && app.mouseX < 440 && app.mouseY > 400 && app.mouseY <500 && pokeelige == true) {
+			if(app.mouseX > 384 && app.mouseX < 555 && app.mouseY > 415 && app.mouseY <478 && pokeelige == true) {
 				
 				pantalla  ++;
 				
