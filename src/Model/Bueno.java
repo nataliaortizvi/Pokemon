@@ -12,7 +12,9 @@ public class Bueno extends Personaje {
 	int dir;
 	
 	
-	public Bueno (int posX, int posY, int tam, PApplet app) {
+
+	public Bueno ( int posX, int posY, int tam, PApplet app) {
+
 		super (posX, posY, tam, app);
 		this.tam = 50;
 		this.vel = 50;
@@ -29,6 +31,7 @@ public class Bueno extends Personaje {
 	
 	public void pintar () {
 		switch(cambiar){
+
 		case 1: app.image(perFrente,posX,posY,30,75);
 		break;
 		case 2: app.image(perBack,posX,posY,30,75);
