@@ -9,6 +9,17 @@ public class Juego {
 	PImage pantInicio, inicioBlanco, pantRegistro, pantLab, pantElige, 
 		   pantCampo, pantBatalla, pantPokedex;
 	
+	int [][] mapa = { {0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1},
+	                  {0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1},
+	                  {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1},
+	                  {0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1},
+	                  {0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
+	                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	                  {0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0},
+	                  {0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0},
+	                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}   };
+	
 	int pantalla;
 	
 	public Juego(PApplet app) {
@@ -23,8 +34,11 @@ public class Juego {
 		pantPokedex= app.loadImage("images/pokedex.png");
 		
 		pantalla = 0;
-	
+		
+		
+		       
 	}
+	
 	
 	//metodos
 	public void iniciarTodo() {

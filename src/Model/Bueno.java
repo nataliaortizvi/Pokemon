@@ -13,6 +13,8 @@ public class Bueno extends Personaje {
 	
 	public Bueno (String nom, int posX, int posY, int tam, PApplet app) {
 		super (posX, posY, tam, app);
+		this.tam = 50;
+		this.vel = 50;
 		
 		cambiar = 1;
 		
@@ -45,21 +47,29 @@ public class Bueno extends Personaje {
 
 
 	public void moverDer () {
-		
+		if (this.posX > 0 || this.posY < 800) {
+			this.posX += this.vel;
+		}
 		
 	}
 	
 	public void moverIzq () {
-		
+		if (this.posX > 0 || this.posX < 800) {
+            this.posX -= this.vel;
+        }
 	}
 	
 	public void moverArr () {
-		
+		if (this.posY > 0 || this.posY < 700) {
+            this.posY -= this.vel;
+        }
 	
 	}
 	
 	public void moverAba () {
-		
+		 if(this.posY > 0 || this.posY < 700){
+	            this.posY += this.vel;
+	        }
 		
 	}
 	

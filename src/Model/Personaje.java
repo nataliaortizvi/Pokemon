@@ -1,7 +1,7 @@
 package Model;
 
 import processing.core.PApplet;
-import processing.core.PImage;
+
 
 public abstract class Personaje {
 	
@@ -18,7 +18,7 @@ public abstract class Personaje {
 		this.posX = posX;
 		this.posY = posY;
 		this.tam = 50;
-		this.vel = 2;
+		this.vel = 50;
 		this.app = app;
 		
 	}
