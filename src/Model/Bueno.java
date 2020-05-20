@@ -11,7 +11,7 @@ public class Bueno extends Personaje {
 	int cambiar;
 	
 	
-	public Bueno (String nom, int posX, int posY, int tam, PApplet app) {
+	public Bueno ( int posX, int posY, int tam, PApplet app) {
 		super (posX, posY, tam, app);
 		
 		cambiar = 1;
