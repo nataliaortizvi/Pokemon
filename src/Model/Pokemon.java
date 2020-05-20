@@ -5,7 +5,7 @@ import processing.core.PApplet;
 public abstract class Pokemon implements Runnable{
 	
 	String nom;
-	String tipo;
+	int tipo;
 	int posicion;
 	
 	int nivel;
@@ -15,7 +15,8 @@ public abstract class Pokemon implements Runnable{
 	int vida, vel, dir;
 	PApplet app;
 	
-	public Pokemon(int posX, int posY, PApplet app) {
+	public Pokemon(int tipo, int posX, int posY, PApplet app) {
+		this.tipo = tipo;
 		this.posX = posX;
 		this.posY = posY;
 		this.nivel = 2;
@@ -24,12 +25,8 @@ public abstract class Pokemon implements Runnable{
 		this.app = app;
 		this.vel = 3;
 		this.dir = 1;
-		this.posicion = 0;
 	}
 	
-	public void run() {
-		mover();
-	}
 	
 	
 	//metodos
@@ -71,6 +68,100 @@ public abstract class Pokemon implements Runnable{
 	}
 	
 	public void danio() {
+	}
+	
+	
+	
+	
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+	
+	public void run() {
+		mover();
+	}
+	public String getNom() {
+		return nom;
+	}
+
+	
+
+	public int getPosicion() {
+		return posicion;
+	}
+
+	public int getNivel() {
+		return nivel;
+	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public int getAtaque() {
+		return ataque;
+	}
+
+	public int getVida() {
+		return vida;
+	}
+
+	public int getVel() {
+		return vel;
+	}
+
+	public int getDir() {
+		return dir;
+	}
+
+	public PApplet getApp() {
+		return app;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+
+	public void setPosicion(int posicion) {
+		this.posicion = posicion;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	public void setAtaque(int ataque) {
+		this.ataque = ataque;
+	}
+
+	public void setVida(int vida) {
+		this.vida = vida;
+	}
+
+	public void setVel(int vel) {
+		this.vel = vel;
+	}
+
+	public void setDir(int dir) {
+		this.dir = dir;
+	}
+
+	public void setApp(PApplet app) {
+		this.app = app;
 	}
 
 }

@@ -13,10 +13,9 @@ public class Bueno extends Personaje {
 	
 	
 
-	public Bueno ( int posX, int posY, int tam, PApplet app) {
+	public Bueno ( int posX, int posY, PApplet app) {
 
-		super (posX, posY, tam, app);
-		this.tam = 50;
+		super (posX, posY,app);
 		this.vel = 50;
 		
 		cambiar = 1;
@@ -85,6 +84,66 @@ public class Bueno extends Personaje {
 	
 	public void atrapar () {
 		
+	}
+
+
+	public PImage getPerFrente() {
+		return perFrente;
+	}
+
+
+	public PImage getPerBack() {
+		return perBack;
+	}
+
+
+	public PImage getPerPerfil() {
+		return perPerfil;
+	}
+
+
+	public PImage getPerPerfilDer() {
+		return perPerfilDer;
+	}
+
+
+	public int getCambiar() {
+		return cambiar;
+	}
+
+
+	public int getDir() {
+		return dir;
+	}
+
+
+	public void setPerFrente(PImage perFrente) {
+		this.perFrente = perFrente;
+	}
+
+
+	public void setPerBack(PImage perBack) {
+		this.perBack = perBack;
+	}
+
+
+	public void setPerPerfil(PImage perPerfil) {
+		this.perPerfil = perPerfil;
+	}
+
+
+	public void setPerPerfilDer(PImage perPerfilDer) {
+		this.perPerfilDer = perPerfilDer;
+	}
+
+
+	public void setCambiar(int cambiar) {
+		this.cambiar = cambiar;
+	}
+
+
+	public void setDir(int dir) {
+		this.dir = dir;
 	}
 	
 	

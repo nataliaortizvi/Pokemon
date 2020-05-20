@@ -10,7 +10,7 @@ public class Malo extends Personaje {
 	PImage maloPerfilDer;
 	PImage maloPerfilIzq;
 	public Malo (int posX, int posY, int tam, PApplet app) {
-		super (posX, posY, tam, app);
+		super (posX, posY, app);
 		maloFrente = app.loadImage("images/maloFront.png");
 		maloPerfilDer = app.loadImage("images/maloPerfilDer.png");
 		maloPerfilIzq = app.loadImage("images/Malo Perfil.png");

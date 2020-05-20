@@ -10,14 +10,12 @@ public abstract class Personaje {
 	public int posY;
 	public int fecha;
 	public int vel;
-	public int tam;
 	public PApplet app;
 
 	
-	public Personaje (int posX, int posY, int tam, PApplet app) {
+	public Personaje (int posX, int posY,  PApplet app) {
 		this.posX = posX;
 		this.posY = posY;
-		this.tam = 50;
 		this.vel = 50;
 		this.app = app;
 		
@@ -73,13 +71,7 @@ public abstract class Personaje {
 		this.vel = vel;
 	}
 
-	public int getTam() {
-		return tam;
-	}
-
-	public void setTam(int tam) {
-		this.tam = tam;
-	}
+	
 
 	public PApplet getApp() {
 		return app;
