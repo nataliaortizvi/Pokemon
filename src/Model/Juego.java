@@ -10,9 +10,13 @@ import processing.core.PFont;
 import processing.core.PImage;
 
 public class Juego {
+<<<<<<< HEAD
 	boolean pokeelige,charman,planta,tortu;
 	
 	int pokemonAleatorio;
+=======
+	boolean pokeelige,charman,planta,tortu,pokedexSalir;
+>>>>>>> c51a1d52b6c0eb041eab1629beb3a4b22929eaaa
 
 	PApplet app;
 	
@@ -30,7 +34,7 @@ public class Juego {
 	                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}   };
 
 	Bueno perso;
-	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige, 
+	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige,pokeSalir, 
 		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF;
 	
 	ControlP5 control;
@@ -49,6 +53,7 @@ public class Juego {
 	Bueno ash;
 	
 	public Juego(PApplet app) {
+		pokedexSalir = false;
 		this.app = app;
 		
 		
@@ -63,8 +68,12 @@ public class Juego {
 		pantCampo= app.loadImage("images/campo.png");
 		pantBatalla= app.loadImage("images/batalla.png");
 		pantPokedex= app.loadImage("images/pokedex.png");
+<<<<<<< HEAD
 		aceptar = app.loadImage("images/Aceptar.png");
 		pokebolita = app.loadImage("images/pokebolita.png");
+=======
+		pokeSalir = app.loadImage("images/pokeSalir.png");
+>>>>>>> c51a1d52b6c0eb041eab1629beb3a4b22929eaaa
 		
 
 		//variables juego
@@ -232,6 +241,11 @@ public class Juego {
 			nombre.hide();
 			app.image(pantPokedex,0,0,800,500);
 			
+			if(pokedexSalir= true) {
+				
+				app.image(pokeSalir,580,420,210,70);
+			}
+			
 			break;
 		}
 		
@@ -307,6 +321,12 @@ public class Juego {
 			break;
 		case 4: 
 			//campo
+                       if(app.mouseX > 21 && app.mouseX < 77 && app.mouseY > 415 && app.mouseY <470 && pokeelige == true) {
+				
+				pantalla =6;
+                       }
+                       
+                       
 			
 			break;
 		case 5:
@@ -315,6 +335,12 @@ public class Juego {
 			break;
 		case 6:
 			//pokedex
+if(app.mouseX > 580 && app.mouseX < 755 && app.mouseY > 420 && app.mouseY <488 ) {
+	pokedexSalir = true;
+				
+				pantalla  =4;
+				
+			}
 			
 			break;
 		}
