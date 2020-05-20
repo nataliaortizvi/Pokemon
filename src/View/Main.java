@@ -6,6 +6,8 @@ import processing.core.PApplet;
 public class Main extends PApplet {
 	
 	ControllerC controllerView;
+	
+	
 
 
 	public static void main(String[] args) {
@@ -40,8 +42,9 @@ public class Main extends PApplet {
 	}
 	
 	public void keyPressed() {
+			controllerView.iniciarTeclado();
 		
-		
+	
 	}
 	
 

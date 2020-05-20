@@ -12,6 +12,20 @@ public class Juego {
 	boolean pokeelige,charman,planta,tortu;
 
 	PApplet app;
+
+
+	
+	int [][] mapa = { {0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1},
+	                  {0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1},
+	                  {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1},
+	                  {0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1},
+	                  {0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
+	                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	                  {0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+	                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}   };
+
 	Bueno perso;
 	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige, 
 		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF;
@@ -23,6 +37,12 @@ public class Juego {
 	ArrayList<Jugador> jugadores;
 	
 	int pantalla;
+	
+	int xLogica;
+	int yLogica;
+	int seMovio;
+	
+	Bueno ash;
 	
 	public Juego(PApplet app) {
 		this.app = app;
@@ -49,6 +69,18 @@ public class Juego {
 		pantBatalla= app.loadImage("images/batalla.png");
 		pantPokedex= app.loadImage("images/pokedex.png");
 		
+
+		ash = new Bueno (600, 150, 50, app);
+		
+		
+		pantalla = 0;
+		xLogica = 12;
+		yLogica = 4;
+		seMovio = 1;
+		
+		
+		       
+
 		aceptar = app.loadImage("images/Aceptar.png");
 		pokebolita = app.loadImage("images/pokebolita.png");
 		
@@ -75,12 +107,14 @@ public class Juego {
 		
 		jugadores = new ArrayList<Jugador>();
 		
+		
+
 	}
 	
+	
+	
+	
 	//metodos
-	
-	
-	
 	public void iniciarTodo() {
 		switch(pantalla) {
 		case 0:
@@ -164,6 +198,7 @@ public class Juego {
 		case 4: 
 			//campo
 			app.image(pantCampo,0,0,800,500);
+			ash.pintar();
 			
 			
 			break;
@@ -263,7 +298,41 @@ public class Juego {
 		
 	}
 	
-	
+	public void teclado () {
+		switch (pantalla) {
+		case 4:
+			
+			if (app.keyCode == app.DOWN) {
+				if (this.mapa[yLogica + seMovio][xLogica] == 0) {
+					yLogica += seMovio;
+					ash.moverAba();
+				} 
+			}
+			
+			if (app.keyCode == app.UP) {	
+				if (this.mapa[yLogica - seMovio][xLogica] == 0) {
+					yLogica -= seMovio;
+					ash.moverArr();
+				}
+			}
+			
+			if (app.keyCode == app.LEFT) {
+				if (this.mapa[yLogica][xLogica - seMovio] == 0) {
+					xLogica -= seMovio;
+					ash.moverIzq();
+				}
+				
+			}
+			
+			if (app.keyCode == app.RIGHT) {	
+				if (this.mapa[yLogica][xLogica + seMovio] == 0) {
+					xLogica += seMovio;
+					ash.moverDer();
+				}
+			}
+		}
+		
+	}
 	
 	
 	
