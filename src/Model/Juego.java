@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 import controlP5.ControlP5;
 import controlP5.Textfield;
 import processing.core.PApplet;
@@ -16,6 +18,8 @@ public class Juego {
 	ControlP5 control;
 	Textfield nombre;
 	PFont font;
+	
+	ArrayList<Jugador> jugadores;
 	
 	int pantalla;
 	
@@ -38,6 +42,8 @@ public class Juego {
 		pantalla = 0;
 		
 		//cosas de registro
+		
+		
 		control = new ControlP5(app);
 		font = app.createFont ("arial", 27);
 	
@@ -50,9 +56,23 @@ public class Juego {
 				.setFont(font)
 				;
 		
+		jugadores = new ArrayList<Jugador>();
+		
 	}
 	
 	//metodos
+	
+	public void cargarUsuarios() {
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	public void iniciarTodo() {
 		switch(pantalla) {
 		case 0:

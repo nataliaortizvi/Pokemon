@@ -1,7 +1,6 @@
 package Model;
 
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public abstract class Personaje {
 	
