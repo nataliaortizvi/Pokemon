@@ -20,6 +20,10 @@ public class ControllerC {
 		jueguito.elMouse();
 		
 	}
+	
+	public void iniciarTeclado() {
+		jueguito.teclado();
+	}
 
 	
 	
