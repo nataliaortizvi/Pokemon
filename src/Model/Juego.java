@@ -7,7 +7,7 @@ import processing.core.PFont;
 import processing.core.PImage;
 
 public class Juego {
-	boolean pokeelige,charman,planta,tortu;
+	boolean pokeelige,charman,planta,tortu,pokedexSalir;
 
 	PApplet app;
 
@@ -25,7 +25,7 @@ public class Juego {
 	                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}   };
 
 	Bueno perso;
-	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige, 
+	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige,pokeSalir, 
 		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF;
 	
 	ControlP5 control;
@@ -41,6 +41,7 @@ public class Juego {
 	Bueno ash;
 	
 	public Juego(PApplet app) {
+		pokedexSalir = false;
 		this.app = app;
 		pokeelige = false;
 		charman = false; 
@@ -64,6 +65,7 @@ public class Juego {
 		pantCampo= app.loadImage("images/campo.png");
 		pantBatalla= app.loadImage("images/batalla.png");
 		pantPokedex= app.loadImage("images/pokedex.png");
+		pokeSalir = app.loadImage("images/pokeSalir.png");
 		
 
 		ash = new Bueno (600, 150, 50, app);
@@ -198,6 +200,11 @@ public class Juego {
 			//pokedex
 			app.image(pantPokedex,0,0,800,500);
 			
+			if(pokedexSalir= true) {
+				
+				app.image(pokeSalir,580,420,210,70);
+			}
+			
 			break;
 		}
 		
@@ -273,6 +280,12 @@ public class Juego {
 			break;
 		case 4: 
 			//campo
+                       if(app.mouseX > 21 && app.mouseX < 77 && app.mouseY > 415 && app.mouseY <470 && pokeelige == true) {
+				
+				pantalla =6;
+                       }
+                       
+                       
 			
 			break;
 		case 5:
@@ -281,6 +294,12 @@ public class Juego {
 			break;
 		case 6:
 			//pokedex
+if(app.mouseX > 580 && app.mouseX < 755 && app.mouseY > 420 && app.mouseY <488 ) {
+	pokedexSalir = true;
+				
+				pantalla  =4;
+				
+			}
 			
 			break;
 		}
