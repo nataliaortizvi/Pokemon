@@ -17,10 +17,10 @@ public class PokemonThree extends Pokemon{
 		public void pintar() {
 			switch (posicion) {
 			case 0:
-				app.image(snivyFrente, 300, 100);
+				app.image(snivyFrente, posX, posY,60,70);
 				break;
 			case 1:
-				app.image(snivyBack, 300, 200);
+				app.image(snivyBack, posX, posY);
 				break;
 			}
 		}

@@ -26,6 +26,7 @@ public class Bueno extends Personaje {
 		perBack = app.loadImage("images/buenoBack.png");
 		perPerfil = app.loadImage("images/buenoperfil.png");
 		perPerfilDer = app.loadImage("images/buenoperfilDer.png");
+		
 	}
 	
 	

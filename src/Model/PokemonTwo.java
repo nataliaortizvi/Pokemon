@@ -21,10 +21,10 @@ public class PokemonTwo extends Pokemon{
 	public void pintar() {
 		switch (posicion) {
 		case 0:
-			app.image(squirtleFrente, 200, 100);
+			app.image(squirtleFrente, posX, posY,60,70);
 			break;
 		case 1:
-			app.image(squirtleBack, 200, 200);
+			app.image(squirtleBack, posX, posY);
 			break;
 		}
 	}

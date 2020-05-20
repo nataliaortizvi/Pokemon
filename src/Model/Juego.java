@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import controlP5.ControlP5;
 import controlP5.Textfield;
@@ -10,11 +11,13 @@ import processing.core.PImage;
 
 public class Juego {
 	boolean pokeelige,charman,planta,tortu;
+	
+	int pokemonAleatorio;
 
 	PApplet app;
-
-
 	
+	
+	//mapa
 	int [][] mapa = { {0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1},
 	                  {0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1},
 	                  {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1},
@@ -34,6 +37,7 @@ public class Juego {
 	Textfield nombre;
 	PFont font;
 	
+	LinkedList<Pokemon> pokemonsitos;
 	ArrayList<Jugador> jugadores;
 	
 	int pantalla;
@@ -46,15 +50,6 @@ public class Juego {
 	
 	public Juego(PApplet app) {
 		this.app = app;
-		pokeelige = false;
-		charman = false; 
-		tortu = false;
-		planta = false;
-		 
-		perso = new Bueno(400,400,50,app);
-		charmanderF = app.loadImage("images/charmander.png");
-		SnivyF = app.loadImage("images/snivy.png");
-		squirtleF = app.loadImage("images/squirtle.png");
 		
 		
 		//imagenes
@@ -68,27 +63,45 @@ public class Juego {
 		pantCampo= app.loadImage("images/campo.png");
 		pantBatalla= app.loadImage("images/batalla.png");
 		pantPokedex= app.loadImage("images/pokedex.png");
+		aceptar = app.loadImage("images/Aceptar.png");
+		pokebolita = app.loadImage("images/pokebolita.png");
 		
 
+		//variables juego
 		ash = new Bueno (600, 150, 50, app);
 		
+		pokeelige = false;
+		charman = false; 
+		tortu = false;
+		planta = false;
 		
+		perso = new Bueno(400,400,50,app);
+		charmanderF = app.loadImage("images/charmander.png");
+		SnivyF = app.loadImage("images/snivy.png");
+		squirtleF = app.loadImage("images/squirtle.png");
 		pantalla = 0;
 		xLogica = 12;
 		yLogica = 4;
 		seMovio = 1;
 		
+		pantalla = 4;
 		
-		       
+		pokemonsitos = new LinkedList<Pokemon>();
+		pokemonAleatorio = (int) Math.floor(Math.random()*3);
+		
+		for(int i = 0; i < 1; i++) {
+			if(pokemonAleatorio == 0) {
+				pokemonsitos.add(new PokemonOne(50,50,app));
+			}
+			if(pokemonAleatorio == 1) {
+				pokemonsitos.add(new PokemonTwo(50,50,app));
+			}
+			if(pokemonAleatorio == 2) {
+				pokemonsitos.add(new PokemonThree(50,50,app));
+			}
+			
+		}
 
-		aceptar = app.loadImage("images/Aceptar.png");
-		pokebolita = app.loadImage("images/pokebolita.png");
-		
-		
-		pantalla = 0;
-
-
-		
 		//cosas de registro
 		
 		
@@ -145,8 +158,8 @@ public class Juego {
 			nombre.hide();
 			if(app.mouseX > 360 && app.mouseX < 480 && app.mouseY > 195 && app.mouseY <260) {
 				app.image(pokebolita,350,195,50,50);
-				app.image(pokebolita,353+48,195,50,50);
-				app.image(pokebolita,353+48+48,195,50,50);
+				app.image(pokebolita,353+45,195,50,50);
+				app.image(pokebolita,353+45+45,195,50,50);
 			}
 			
 			perso.pintar();
@@ -197,18 +210,26 @@ public class Juego {
 			break;
 		case 4: 
 			//campo
+			nombre.hide();
 			app.image(pantCampo,0,0,800,500);
 			ash.pintar();
+			
+			for(int i = 0; i < pokemonsitos.size(); i++) {
+			pokemonsitos.get(i).pintar();
+			new Thread (pokemonsitos.get(i)).start();
+			}
 			
 			
 			break;
 		case 5:
 			//batalla
+			nombre.hide();
 			app.image(pantBatalla,0,0,800,500);
 			
 			break;
 		case 6:
 			//pokedex
+			nombre.hide();
 			app.image(pantPokedex,0,0,800,500);
 			
 			break;
@@ -272,9 +293,11 @@ public class Juego {
 				pokeelige = true;
 			}
 			
+			if(app.mouseX > 573 && app.mouseX < 740 && app.mouseY > 415 && app.mouseY <478) {
+				pantalla = 2;
+			}
 			
-			
-			if(app.mouseX > 384 && app.mouseX < 440 && app.mouseY > 400 && app.mouseY <500 && pokeelige == true) {
+			if(app.mouseX > 384 && app.mouseX < 555 && app.mouseY > 415 && app.mouseY <478 && pokeelige == true) {
 				
 				pantalla  ++;
 				
