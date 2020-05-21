@@ -37,6 +37,9 @@ public class Juego {
 	int xLogica;
 	int yLogica;
 	int seMovio;
+	int xLab;
+	int yLab;
+	int moveLab;
 	
 	Bueno ash;
 	
@@ -47,7 +50,7 @@ public class Juego {
 		tortu = false;
 		planta = false;
 		 
-		perso = new Bueno(400,400,50,app);
+		perso = new Bueno(200,300,50,app);
 		charmanderF = app.loadImage("images/charmander.png");
 		SnivyF = app.loadImage("images/snivy.png");
 		squirtleF = app.loadImage("images/squirtle.png");
@@ -74,6 +77,9 @@ public class Juego {
 		yLogica = 4;
 		seMovio = 1;
 		
+		xLab = 4;
+		yLab = 6;
+		moveLab = 1;
 		
 		       
 
@@ -286,35 +292,56 @@ public class Juego {
 	}
 	
 	public void teclado () {
-		switch (pantalla) {
-		case 4:
+		if (perso.getPosX() > 0 && perso.getPosX() < 800 && perso.getPosY() > 0 && perso.getPosY() < 500 ||
+				ash.getPosX() > 0 && ash.getPosX() < 800 && ash.getPosY() > 0 && ash.getPosY() < 500) {
 			
-			if (app.keyCode == app.DOWN) {
-				if (this.mapa[yLogica + seMovio][xLogica] == 0) {
-					yLogica += seMovio;
-					ash.moverAba();
-				} 
-			}
-			
-			if (app.keyCode == app.UP) {	
-				if (this.mapa[yLogica - seMovio][xLogica] == 0) {
-					yLogica -= seMovio;
-					ash.moverArr();
-				}
-			}
-			
-			if (app.keyCode == app.LEFT) {
-				if (this.mapa[yLogica][xLogica - seMovio] == 0) {
-					xLogica -= seMovio;
-					ash.moverIzq();
+			switch (pantalla) {
+			case 2:
+				if (app.keyCode == app.UP) {
+					perso.moverArr();
 				}
 				
-			}
-			
-			if (app.keyCode == app.RIGHT) {	
-				if (this.mapa[yLogica][xLogica + seMovio] == 0) {
-					xLogica += seMovio;
-					ash.moverDer();
+				if (app.keyCode == app.DOWN) {
+					perso.moverAba();
+				}
+				
+				if (app.keyCode == app.LEFT) {
+					perso.moverIzq();
+				}
+				
+				if (app.keyCode == app.RIGHT) {
+					perso.moverDer();
+				}
+				break;
+			case 4:
+				
+				if (app.keyCode == app.DOWN) {
+					if (this.mapa[yLogica + seMovio][xLogica] == 0) {
+						yLogica += seMovio;
+						ash.moverAba();
+					} 
+				}
+				
+				if (app.keyCode == app.UP) {	
+					if (this.mapa[yLogica - seMovio][xLogica] == 0) {
+						yLogica -= seMovio;
+						ash.moverArr();
+					}
+				}
+				
+				if (app.keyCode == app.LEFT) {
+					if (this.mapa[yLogica][xLogica - seMovio] == 0) {
+						xLogica -= seMovio;
+						ash.moverIzq();
+					}
+					
+				}
+				
+				if (app.keyCode == app.RIGHT) {	
+					if (this.mapa[yLogica][xLogica + seMovio] == 0) {
+						xLogica += seMovio;
+						ash.moverDer();
+					}
 				}
 			}
 		}
