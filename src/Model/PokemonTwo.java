@@ -5,13 +5,12 @@ import processing.core.PImage;
 
 public class PokemonTwo extends Pokemon{
 	
-	private int posicion = 0;
 	
 	PImage squirtleFrente;
 	PImage squirtleBack;
 	
-	public PokemonTwo(int posX, int posY, PApplet app) {
-		super(posX, posY, app);
+	public PokemonTwo(int tipo, int posX, int posY, PApplet app) {
+		super(tipo, posX, posY, app);
 		
 		squirtleFrente = app.loadImage("images/squirtle.png");
 		squirtleBack = app.loadImage("images/squirtleBack.png");
@@ -19,13 +18,17 @@ public class PokemonTwo extends Pokemon{
 	}
 	
 	public void pintar() {
-		switch (posicion) {
+		switch (tipo) {
 		case 0:
-			app.image(squirtleFrente, 200, 100);
+			app.image(squirtleFrente, posX, posY,60,70);
 			break;
 		case 1:
-			app.image(squirtleBack, 200, 200);
+			app.image(squirtleBack, posX, posY, 250,250);
 			break;
+		case 2:
+			app.image(squirtleFrente, posX, posY,150,150);
+			break;
+		
 		}
 	}
 
