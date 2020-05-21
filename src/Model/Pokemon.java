@@ -19,11 +19,9 @@ public abstract class Pokemon implements Runnable{
 		this.tipo = tipo;
 		this.posX = posX;
 		this.posY = posY;
-		this.nivel = 2;
-		this.ataque = 3;
-		this.vida = 3;
 		this.app = app;
-		this.vel = 3;
+		this.vel = 5;
+		this.vida = 8;
 		this.dir = 1;
 	}
 	

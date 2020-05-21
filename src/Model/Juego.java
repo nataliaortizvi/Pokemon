@@ -251,6 +251,10 @@ public class Juego {
 			//batalla
 			nombre.hide();
 			app.image(pantBatalla,0,0,800,500);
+			app.fill(28,82,47);
+			app.noStroke();
+			app.rect(506,316,167,17);
+			app.rect(306,80,167,17);
 			
 			
 			for(int j = 0; j < mios.size(); j++) {
@@ -280,6 +284,8 @@ public class Juego {
 			break;
 		}
 		
+		app.fill(0);
+		app.textSize(10);
 		app.text("x="+ app.mouseX + "y=" + app.mouseY, app.mouseX, app.mouseY);
 		
 		
@@ -349,7 +355,7 @@ public class Juego {
 						mios.add(new PokemonOne(1,60,100,app));
 					}
 					if(planta == true) {
-						mios.add(new PokemonThree(1,95,130,app));
+						mios.add(new PokemonThree(1,95,140,app));
 					}
 				}
 				pantalla  ++;

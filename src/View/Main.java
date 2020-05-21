@@ -37,7 +37,7 @@ public class Main extends PApplet {
 	}
 	
 	public void mousePressed() {
-		controllerView.iniciarMouse();
+		//controllerView.iniciarMouse();
 		
 	}
 	
