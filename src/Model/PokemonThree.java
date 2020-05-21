@@ -21,6 +21,9 @@ public class PokemonThree extends Pokemon{
 			case 1:
 				app.image(snivyBack, posX, posY);
 				break;
+			case 2:
+				app.image(snivyFrente, posX, posY,150,150);
+				break;
 			
 		}
 		}

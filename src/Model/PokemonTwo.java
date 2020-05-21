@@ -25,6 +25,9 @@ public class PokemonTwo extends Pokemon{
 		case 1:
 			app.image(squirtleBack, posX, posY, 250,250);
 			break;
+		case 2:
+			app.image(squirtleFrente, posX, posY,150,150);
+			break;
 		
 		}
 	}

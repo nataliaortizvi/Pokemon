@@ -38,7 +38,7 @@ public class Juego {
 	Textfield nombre;
 	PFont font;
 	
-	LinkedList<Pokemon> pokemonsitos;
+	LinkedList<Pokemon> pokemonsitos, pokemonsotes;
 	LinkedList<Pokemon> mios;
 	
 	ArrayList<Jugador> jugadores;
@@ -95,18 +95,23 @@ public class Juego {
 		System.out.println();
 		pokemonAleatorio = (int) Math.floor(Math.random()*3);
 		pokemonsitos = new LinkedList<Pokemon>();
+		pokemonsotes = new LinkedList<Pokemon>();
 		mios = new LinkedList<Pokemon>();
 	
 		
 		for(int i = 0; i < 1; i++) {
 			if(pokemonAleatorio == 0) {
 				pokemonsitos.add(new PokemonOne(0,50,50,app));
+				pokemonsotes.add(new PokemonOne(2,540,50,app));
+				
 			}
 			if(pokemonAleatorio == 1) {
 				pokemonsitos.add(new PokemonTwo(0,50,50,app));
+				pokemonsotes.add(new PokemonTwo(2,530,50,app));
 			}
 			if(pokemonAleatorio == 2) {
 				pokemonsitos.add(new PokemonThree(0,50,50,app));
+				pokemonsotes.add(new PokemonThree(2,524,45,app));
 			}
 		}
 		
@@ -219,6 +224,7 @@ public class Juego {
 			
 			if(PApplet.dist(ash.getPosX(), ash.getPosY(), pokemonsitos.get(i).getPosX(), pokemonsitos.get(i).getPosY())<50) {
 				pantalla = 5;
+				
 			}
 		}
 		
@@ -232,6 +238,12 @@ public class Juego {
 			for(int j = 0; j < mios.size(); j++) {
 				mios.get(j).pintar();
 			}
+			
+			for(int i = 0; i < pokemonsotes.size(); i++) {
+				pokemonsotes.get(i).pintar();
+			}
+			
+			
 			
 			
 			break;

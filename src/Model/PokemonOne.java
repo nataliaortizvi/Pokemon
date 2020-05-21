@@ -26,7 +26,9 @@ public class PokemonOne extends Pokemon{
 		case 1:
 			app.image(charmanderBack, posX, posY);
 			break;
-		
+		case 2:
+			app.image(charmanderFrente,posX, posY, 130,150);
+			break;
 		}
 		
 		
