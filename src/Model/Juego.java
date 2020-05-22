@@ -35,13 +35,13 @@ public class Juego {
 		   pokebola;
 	
 	ControlP5 control;
-	Textfield nombre;
+	String usuario;
 	PFont font;
 	
 	LinkedList<Pokemon> pokemonsitos, pokemonsotes;
 	LinkedList<Pokemon> mios;
 	
-	ArrayList<Jugador> jugadores;
+	ArrayList <User> jugadores;
 	
 	int pantalla;
 	
@@ -142,7 +142,7 @@ public class Juego {
 		font = app.createFont ("arial", 27);
 
 	
-		nombre = control.addTextfield("")
+		control.addTextfield("usuarioImput")
 				.setPosition(85,201)
 				.setSize(297,69)
 				.setColor(app.color(255))
@@ -151,10 +151,9 @@ public class Juego {
 				.setFont(font)
 				;
 		
-		jugadores = new ArrayList<Jugador>();
+		jugadores = new ArrayList <User> ();
 
 	}
-	
 	
 	//metodos
 	public void iniciarTodo() {
@@ -162,21 +161,29 @@ public class Juego {
 		case 0:
 			//inicio
 			app.image(pantInicio,0,0,800,500);
-			nombre.hide();
+			control.hide();
 
 			if(app.mouseX > 247 && app.mouseX < 551 && app.mouseY > 414 && app.mouseY < 457) {
 				app.image(inicioBlanco,230,407,340,50);
 			}
 			
+			
+			
 			break;
 		case 1:
 			//registro
 			app.image(pantRegistro,0,0,800,500);
-			nombre.show();
+			control.show();
 			
 			if(app.mouseX > 178 && app.mouseX < 295 && app.mouseY > 312 && app.mouseY < 355) {
 				app.image(inicioR,175,305,140,50);
 			}
+			
+			usuario = "";
+			
+			//System.out.println(usuario);
+			
+			//System.out.println(Textfield.class,"usuarioImput");
 			
 			
 			
@@ -184,7 +191,7 @@ public class Juego {
 		case 2:
 			//lab
 			app.image(pantLab,0,0,800,500);
-			nombre.hide();
+			control.hide();
 			if(app.mouseX > 360 && app.mouseX < 480 && app.mouseY > 195 && app.mouseY <260) {
 				app.image(pokebolita,350,195,50,50);
 				app.image(pokebolita,353+45,195,50,50);
@@ -198,7 +205,7 @@ public class Juego {
 			break;
 		case 3:
 			//elige
-			nombre.hide();
+			control.hide();
 			app.image(pantElige,0,0,800,500);
 			
 			if(app.mouseX > 590 && app.mouseX < 690 && app.mouseY > 202 && app.mouseY <315) {
@@ -227,7 +234,7 @@ public class Juego {
 			break;
 		case 4: 
 			//campo
-			nombre.hide();
+			control.hide();
 			app.image(pantCampo,0,0,800,500);
 			ash.pintar();
 			
@@ -249,7 +256,7 @@ public class Juego {
 			break;
 		case 5:
 			//batalla
-			nombre.hide();
+			control.hide();
 			app.image(pantBatalla,0,0,800,500);
 			app.fill(28,82,47);
 			app.noStroke();
@@ -271,7 +278,7 @@ public class Juego {
 			break;
 		case 6:
 			//pokedex
-			nombre.hide();
+			control.hide();
 			app.image(pantPokedex,0,0,800,500);
 			
 			app.image(pokeSalir,560,417,230,70);
@@ -304,7 +311,13 @@ public class Juego {
 		case 1:
 			//registro
 			if(app.mouseX > 178 && app.mouseX < 295 && app.mouseY > 312 && app.mouseY < 355) {
-				pantalla ++;
+				usuario = control.get(Textfield.class,"usuarioImput").getText();
+				for (int i = 0; i < 1; i++) {
+					jugadores.add(new User (usuario, app));
+					System.out.println(jugadores);
+				}
+			pantalla ++;
+				
 			}
 			
 			break;
@@ -525,5 +538,307 @@ public class Juego {
 	public void setPantalla(int pantalla) {
 		this.pantalla = pantalla;
 	}
+
+
+	public int getPokemonAleatorio() {
+		return pokemonAleatorio;
+	}
+
+
+	public void setPokemonAleatorio(int pokemonAleatorio) {
+		this.pokemonAleatorio = pokemonAleatorio;
+	}
+
+
+	public boolean isPokeelige() {
+		return pokeelige;
+	}
+
+
+	public void setPokeelige(boolean pokeelige) {
+		this.pokeelige = pokeelige;
+	}
+
+
+	public boolean isCharman() {
+		return charman;
+	}
+
+
+	public void setCharman(boolean charman) {
+		this.charman = charman;
+	}
+
+
+	public boolean isPlanta() {
+		return planta;
+	}
+
+
+	public void setPlanta(boolean planta) {
+		this.planta = planta;
+	}
+
+
+	public boolean isTortu() {
+		return tortu;
+	}
+
+
+	public void setTortu(boolean tortu) {
+		this.tortu = tortu;
+	}
+
+
+	public boolean isPokedexSalir() {
+		return pokedexSalir;
+	}
+
+
+	public void setPokedexSalir(boolean pokedexSalir) {
+		this.pokedexSalir = pokedexSalir;
+	}
+
+
+	public int[][] getMapa() {
+		return mapa;
+	}
+
+
+	public void setMapa(int[][] mapa) {
+		this.mapa = mapa;
+	}
+
+
+	public Bueno getPerso() {
+		return perso;
+	}
+
+
+	public void setPerso(Bueno perso) {
+		this.perso = perso;
+	}
+
+
+	public PImage getInicioBlanco() {
+		return inicioBlanco;
+	}
+
+
+	public void setInicioBlanco(PImage inicioBlanco) {
+		this.inicioBlanco = inicioBlanco;
+	}
+
+
+	public PImage getInicioR() {
+		return inicioR;
+	}
+
+
+	public void setInicioR(PImage inicioR) {
+		this.inicioR = inicioR;
+	}
+
+
+	public PImage getPokeSalir() {
+		return pokeSalir;
+	}
+
+
+	public void setPokeSalir(PImage pokeSalir) {
+		this.pokeSalir = pokeSalir;
+	}
+
+
+	public PImage getAceptar() {
+		return aceptar;
+	}
+
+
+	public void setAceptar(PImage aceptar) {
+		this.aceptar = aceptar;
+	}
+
+
+	public PImage getPokebolita() {
+		return pokebolita;
+	}
+
+
+	public void setPokebolita(PImage pokebolita) {
+		this.pokebolita = pokebolita;
+	}
+
+
+	public PImage getCharmanderF() {
+		return charmanderF;
+	}
+
+
+	public void setCharmanderF(PImage charmanderF) {
+		this.charmanderF = charmanderF;
+	}
+
+
+	public PImage getSnivyF() {
+		return SnivyF;
+	}
+
+
+	public void setSnivyF(PImage snivyF) {
+		SnivyF = snivyF;
+	}
+
+
+	public PImage getSquirtleF() {
+		return squirtleF;
+	}
+
+
+	public void setSquirtleF(PImage squirtleF) {
+		this.squirtleF = squirtleF;
+	}
+
+
+	public PImage getPokebola() {
+		return pokebola;
+	}
+
+
+	public void setPokebola(PImage pokebola) {
+		this.pokebola = pokebola;
+	}
+
+
+	public ControlP5 getControl() {
+		return control;
+	}
+
+
+	public void setControl(ControlP5 control) {
+		this.control = control;
+	}
+
+
+	public PFont getFont() {
+		return font;
+	}
+
+
+	public void setFont(PFont font) {
+		this.font = font;
+	}
+
+
+	public LinkedList<Pokemon> getPokemonsitos() {
+		return pokemonsitos;
+	}
+
+
+	public void setPokemonsitos(LinkedList<Pokemon> pokemonsitos) {
+		this.pokemonsitos = pokemonsitos;
+	}
+
+
+	public LinkedList<Pokemon> getPokemonsotes() {
+		return pokemonsotes;
+	}
+
+
+	public void setPokemonsotes(LinkedList<Pokemon> pokemonsotes) {
+		this.pokemonsotes = pokemonsotes;
+	}
+
+
+	public LinkedList<Pokemon> getMios() {
+		return mios;
+	}
+
+
+	public void setMios(LinkedList<Pokemon> mios) {
+		this.mios = mios;
+	}
+
+
+	/*public LinkedList<User> getJugadores() {
+		return jugadores;
+	}
+
+
+	public void setJugadores(LinkedList<User> jugadores) {
+		this.jugadores = jugadores;
+	}*/
+
+
+	public int getxLogica() {
+		return xLogica;
+	}
+
+
+	public void setxLogica(int xLogica) {
+		this.xLogica = xLogica;
+	}
+
+
+	public int getyLogica() {
+		return yLogica;
+	}
+
+
+	public void setyLogica(int yLogica) {
+		this.yLogica = yLogica;
+	}
+
+
+	public int getSeMovio() {
+		return seMovio;
+	}
+
+
+	public void setSeMovio(int seMovio) {
+		this.seMovio = seMovio;
+	}
+
+
+	public int getxLab() {
+		return xLab;
+	}
+
+
+	public void setxLab(int xLab) {
+		this.xLab = xLab;
+	}
+
+
+	public int getyLab() {
+		return yLab;
+	}
+
+
+	public void setyLab(int yLab) {
+		this.yLab = yLab;
+	}
+
+
+	public int getMoveLab() {
+		return moveLab;
+	}
+
+
+	public void setMoveLab(int moveLab) {
+		this.moveLab = moveLab;
+	}
+
+
+	public Bueno getAsh() {
+		return ash;
+	}
+
+
+	public void setAsh(Bueno ash) {
+		this.ash = ash;
+	}
+	
+	
 
 }

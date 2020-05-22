@@ -10,21 +10,21 @@ public class ControllerC {
 	public ControllerC(PApplet app) {
 		this.jueguito = new Juego(app);
 	}
-
+	
 	public void iniciarControl() {
 		jueguito.iniciarTodo();
 		
 	}
 	
-	
+	public void iniciarMouse() {
+		jueguito.elMouse();
+		
+	}
 	
 	public void iniciarTeclado() {
 		jueguito.teclado();
 	}
 
-	
-	
-	
 	
 	
 	
