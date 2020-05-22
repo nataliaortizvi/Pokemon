@@ -11,7 +11,7 @@ public class PokemonThree extends Pokemon{
 			
 			this.nom = "Snivy";
 			this.nivel = 1;
-			this.ataque = 1;
+			this.ataque = 10;
 			
 			snivyFrente = app.loadImage("images/snivy.png");
 			snivyBack = app.loadImage("images/snivyBack.png");
@@ -24,6 +24,14 @@ public class PokemonThree extends Pokemon{
 				break;
 			case 1:
 				app.image(snivyBack, posX, posY);
+				//vida
+				app.fill(28,82,47);
+				app.noStroke();
+				app.rect(506,316,167,17);
+				
+				app.fill(89,210,129);
+				app.rect(508,318,this.vida,13);
+				
 				//nivel
 				app.fill(28,82,47);
 				app.textSize(16);
@@ -37,6 +45,11 @@ public class PokemonThree extends Pokemon{
 				break;
 			case 2:
 				app.image(snivyFrente, posX, posY,150,150);
+				//vida
+				app.fill(28,82,47);
+				app.rect(306,78,167,17);
+				app.fill(89,210,129);
+				app.rect(308,80,this.vida,13);
 				//nivel
 				app.fill(28,82,47);
 				app.textSize(16);

@@ -14,7 +14,7 @@ public class PokemonTwo extends Pokemon{
 		
 		this.nom = "Squirtle";
 		this.nivel = 3;
-		this.ataque = 3;
+		this.ataque = 30;
 		
 		squirtleFrente = app.loadImage("images/squirtle.png");
 		squirtleBack = app.loadImage("images/squirtleBack.png");
@@ -28,6 +28,14 @@ public class PokemonTwo extends Pokemon{
 			break;
 		case 1:
 			app.image(squirtleBack, posX, posY, 250,250);
+			//vida
+			app.fill(28,82,47);
+			app.noStroke();
+			app.rect(506,316,167,17);
+			
+			app.fill(89,210,129);
+			app.rect(508,318,this.vida,13);
+			
 			//nivel
 			app.fill(28,82,47);
 			app.textSize(16);
@@ -40,6 +48,11 @@ public class PokemonTwo extends Pokemon{
 			break;
 		case 2:
 			app.image(squirtleFrente, posX, posY,150,150);
+			//vida
+			app.fill(28,82,47);
+			app.rect(306,78,167,17);
+			app.fill(89,210,129);
+			app.rect(308,80,this.vida,13);
 			//nivel
 			app.fill(28,82,47);
 			app.textSize(16);
