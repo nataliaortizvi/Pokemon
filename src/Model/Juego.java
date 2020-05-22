@@ -29,6 +29,19 @@ public class Juego {
 	                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	                  {0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
 	                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}   };
+	
+	int [] [] mapa1 = { {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+						{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+						{1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1},
+						{1,1,1,1,0,0,0,1,1,1,0,0,0,0,0,1},
+						{1,1,1,0,0,0,0,1,1,1,0,0,0,0,0,1}, 
+						{1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1},
+						{1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1},
+						{1,1,1,0,0,0,1,0,0,1,0,0,0,1,1,1},
+						{1,0,0,0,0,0,1,0,0,1,0,0,0,1,1,1},
+						{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+						
+	};
 
 	Bueno perso;
 	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige,pokeSalir, 
@@ -97,11 +110,11 @@ public class Juego {
 		tortu = false;
 		planta = false;
 		
-		perso = new Bueno(400,400,app);
+		perso = new Bueno(350,400,app);
 		charmanderF = app.loadImage("images/charmander.png");
 		SnivyF = app.loadImage("images/snivy.png");
 		squirtleF = app.loadImage("images/squirtle.png");
-		pantalla = 0;
+		pantalla = 2;
 		xLogica = 12;
 		yLogica = 4;
 		seMovio = 1;
@@ -111,8 +124,8 @@ public class Juego {
 		escribaNombre = false;
 		
 
-		xLab = 4;
-		yLab = 6;
+		xLab = 7;
+		yLab = 8;
 		moveLab = 1;
 
 		System.out.println();
@@ -153,7 +166,7 @@ public class Juego {
 				.setSize(297,69)
 				.setColor(app.color(255))
 				.setColorBackground(app.color(25,25,25,5))
-				.setColorCaptionLabel(app.color(255))
+				.setColorCaptionLabel(app.color(25,25,25,5))
 				.setFont(font)
 				;
 		
@@ -325,7 +338,7 @@ public class Juego {
 				clicR = true;
 				
 				usuario = control.get(Textfield.class,"usuarioImput").getText();
-				System.out.println(usuario);
+				//System.out.println(usuario);
 				
 				try {
 					laExceptionNombre (usuario,clicR);
@@ -335,7 +348,7 @@ public class Juego {
 					escribaNombre = true;
 					
 				}
-				System.out.println("clic"+clicR);
+				//System.out.println("clic"+clicR);
 				//System.out.println("seguir"+seguir);
 				
 				
@@ -446,19 +459,34 @@ public class Juego {
 			switch (pantalla) {
 			case 2:
 				if (app.keyCode == app.UP) {
-					perso.moverArr();
+					if (this.mapa1[yLab - moveLab][xLab] == 0) {
+						yLab -= moveLab;
+						perso.moverArr();
+					}
+					
 				}
 				
 				if (app.keyCode == app.DOWN) {
-					perso.moverAba();
+					if (this.mapa1[yLab + moveLab][xLab] == 0) {
+						yLab += moveLab;
+						perso.moverAba();
+					}
+					
 				}
 				
 				if (app.keyCode == app.LEFT) {
-					perso.moverIzq();
+					if (this.mapa1[yLab][xLab - moveLab] == 0) {
+						xLab -= moveLab;
+						perso.moverIzq();
+					}
 				}
 				
 				if (app.keyCode == app.RIGHT) {
-					perso.moverDer();
+					if (this.mapa1[yLab][xLab + moveLab] == 0) {
+						xLab += moveLab;
+						perso.moverDer();
+					}
+					
 				}
 				break;
 			case 4:
