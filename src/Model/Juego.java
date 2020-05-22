@@ -45,7 +45,7 @@ public class Juego {
 	ArrayList <User> jugadores;
 	
 	int pantalla;
-	boolean seguir;
+	boolean seguir, clicR, escribaNombre;
 	
 	int xLogica;
 	int yLogica;
@@ -105,7 +105,10 @@ public class Juego {
 		xLogica = 12;
 		yLogica = 4;
 		seMovio = 1;
+		
+		clicR = false;
 		seguir = false;
+		escribaNombre = false;
 		
 
 		xLab = 4;
@@ -184,13 +187,10 @@ public class Juego {
 			
 			usuario = "";
 			
-			try {
-				laExceptionNombre (usuario);
-			} catch (ExceptionNombre e) {
-				System.out.println("msg");
-				
+			if(escribaNombre == true) {
+				app.fill(255);
+				app.text("Agregue un nombre", 100,300);
 			}
-			System.out.println(seguir);
 			
 			
 			
@@ -321,7 +321,25 @@ public class Juego {
 			//registro
 			
 			if(app.mouseX > 178 && app.mouseX < 295 && app.mouseY > 312 && app.mouseY < 355) {
+				
+				clicR = true;
+				
 				usuario = control.get(Textfield.class,"usuarioImput").getText();
+				System.out.println(usuario);
+				
+				try {
+					laExceptionNombre (usuario,clicR);
+				} catch (ExceptionNombre e) {
+					//System.out.println(e);
+					
+					escribaNombre = true;
+					
+				}
+				System.out.println("clic"+clicR);
+				//System.out.println("seguir"+seguir);
+				
+				
+				
 				if (seguir == true) {
 					for (int i = 0; i < 1; i++) {
 						jugadores.add(new User (usuario, app));
@@ -401,7 +419,7 @@ public class Juego {
 			//campo
             if(app.mouseX > 16 && app.mouseX < 85 && app.mouseY > 415 && app.mouseY <480) {
 			pantalla =6;
-			System.out.println("pokeke");
+			//System.out.println("pokeke");
         }                              
 			
 			break;
@@ -479,8 +497,8 @@ public class Juego {
 	}
 	
 	
-	public void laExceptionNombre (String a) throws ExceptionNombre {
-		if (a.equals("")) {
+	public void laExceptionNombre (String a, boolean b) throws ExceptionNombre {
+		if ((a.equals(""))&&(b==true)) {
 			throw new ExceptionNombre("Debe agregar su nombre");
 		} else {
 			seguir = true;
