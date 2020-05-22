@@ -33,11 +33,12 @@ public class Juego {
 	Bueno perso;
 	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige,pokeSalir, 
 		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF,
-		   pokebola;
+		   pokebola,escribeNombre;
 	
 	ControlP5 control;
 	String usuario;
 	PFont font;
+	Malo brian;
 	
 	LinkedList<Pokemon> pokemonsitos, pokemonsotes;
 	LinkedList<Pokemon> mios;
@@ -63,6 +64,7 @@ public class Juego {
 		charman = false; 
 		tortu = false;
 		planta = false;
+		
 		 
 		perso = new Bueno(200,300,app);
 		charmanderF = app.loadImage("images/charmander.png");
@@ -86,6 +88,8 @@ public class Juego {
 		pokebolita = app.loadImage("images/pokebolita.png");
 		pokeSalir = app.loadImage("images/pokeSalir.png");
 		pokebola = app.loadImage("images/pokebola.png");
+		
+		escribeNombre = app.loadImage("images/escribeNombre.png");
 
 		
 
@@ -140,6 +144,7 @@ public class Juego {
 		}
 		
 		
+		brian = new Malo(200,300,app);
 
 		//cosas de registro
 		
@@ -153,7 +158,7 @@ public class Juego {
 				.setSize(297,69)
 				.setColor(app.color(255))
 				.setColorBackground(app.color(25,25,25,5))
-				.setColorCaptionLabel(app.color(255))
+				.setColorCaptionLabel(app.color(25,25,25))
 				.setFont(font)
 				;
 		
@@ -188,8 +193,9 @@ public class Juego {
 			usuario = "";
 			
 			if(escribaNombre == true) {
-				app.fill(255);
-				app.text("Agregue un nombre", 100,300);
+				
+				app.image(escribeNombre,65 ,365,350,70);
+				
 			}
 			
 			
@@ -259,6 +265,13 @@ public class Juego {
 			if(PApplet.dist(ash.getPosX(), ash.getPosY(), pokemonsitos.get(i).getPosX(), pokemonsitos.get(i).getPosY())<50) {
 				pantalla = 5;
 				
+			}
+			brian.pintar();
+			new Thread (brian).start();
+			
+
+			if(PApplet.dist(ash.getPosX(), ash.getPosY(), brian.getPosX(), brian.getPosY())<50) {
+				pantalla = 5;
 			}
 		}
 		
