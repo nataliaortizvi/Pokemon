@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import LaExcepcion.ExceptionNombre;
 import controlP5.ControlP5;
 import controlP5.Textfield;
 import processing.core.PApplet;
@@ -44,6 +45,7 @@ public class Juego {
 	ArrayList <User> jugadores;
 	
 	int pantalla;
+	boolean seguir;
 	
 	int xLogica;
 	int yLogica;
@@ -103,6 +105,7 @@ public class Juego {
 		xLogica = 12;
 		yLogica = 4;
 		seMovio = 1;
+		seguir = false;
 		
 
 		xLab = 4;
@@ -181,9 +184,15 @@ public class Juego {
 			
 			usuario = "";
 			
-			//System.out.println(usuario);
+			try {
+				laExceptionNombre (usuario);
+			} catch (ExceptionNombre e) {
+				System.out.println("msg");
+				
+			}
+			System.out.println(seguir);
 			
-			//System.out.println(Textfield.class,"usuarioImput");
+			
 			
 			
 			
@@ -310,19 +319,27 @@ public class Juego {
 			break;
 		case 1:
 			//registro
+			
 			if(app.mouseX > 178 && app.mouseX < 295 && app.mouseY > 312 && app.mouseY < 355) {
 				usuario = control.get(Textfield.class,"usuarioImput").getText();
-				for (int i = 0; i < 1; i++) {
-					jugadores.add(new User (usuario, app));
-					System.out.println(jugadores);
+				if (seguir == true) {
+					for (int i = 0; i < 1; i++) {
+						jugadores.add(new User (usuario, app));
+						System.out.println(jugadores);
+						pantalla ++;
+					}
+					
 				}
-			pantalla ++;
+				 
+					
+				
 				
 			}
 			
 			break;
 		case 2: //lab
 			if(app.mouseX > 360 && app.mouseX < 480 && app.mouseY > 195 && app.mouseY <260) {
+
 				pantalla ++;
 			}
 			
@@ -462,7 +479,13 @@ public class Juego {
 	}
 	
 	
-	
+	public void laExceptionNombre (String a) throws ExceptionNombre {
+		if (a.equals("")) {
+			throw new ExceptionNombre("Debe agregar su nombre");
+		} else {
+			seguir = true;
+		}
+	}
 	
 	
 	
