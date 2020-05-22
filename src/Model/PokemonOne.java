@@ -13,7 +13,7 @@ public class PokemonOne extends Pokemon{
 	
 		this.nom = "Charmander";
 		this.nivel = 2;
-		this.ataque = 2;
+		this.ataque = 20;
 		
 		charmanderFrente = app.loadImage("images/charmander.png");
 		charmanderBack = app.loadImage("images/charmanderBack.png");
@@ -29,6 +29,14 @@ public class PokemonOne extends Pokemon{
 			break;
 		case 1:
 			app.image(charmanderBack, posX, posY);
+			//vida
+			app.fill(28,82,47);
+			app.noStroke();
+			app.rect(506,316,167,17);
+			
+			app.fill(89,210,129);
+			app.rect(508,318,this.vida,13);
+			
 			//nivel
 			app.fill(28,82,47);
 			app.textSize(16);
@@ -41,6 +49,11 @@ public class PokemonOne extends Pokemon{
 			break;
 		case 2:
 			app.image(charmanderFrente,posX, posY, 130,150);
+			//vida
+			app.fill(28,82,47);
+			app.rect(306,78,167,17);
+			app.fill(89,210,129);
+			app.rect(308,80,this.vida,13);
 			//nivel
 			app.fill(28,82,47);
 			app.textSize(16);
