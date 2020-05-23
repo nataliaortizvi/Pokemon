@@ -45,10 +45,8 @@ public class Juego {
 
 	Bueno perso;
 	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige,pokeSalir, 
-		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF,
+		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF, pokebola,escribeNombre,ataqueR;
 
-		   pokebola,escribeNombre;
-   pokebola, ataqueR;
 
 	
 	ControlP5 control;
@@ -237,7 +235,12 @@ public class Juego {
 				app.image(pokebolita,353+45+45,195,50,50);
 			}
 			
+			
+			
 			perso.pintar();
+			if(PApplet.dist(perso.getPosX(), perso.getPosY(),360, 250)<50) {
+				pantalla = 3;
+			}
 			
 			
 			
