@@ -533,9 +533,14 @@ public class Juego {
 				System.out.println(pokemonsitos.get(j).getVida());
 				//System.out.println(mios.get(i).getAtaque());
 				}
+				
+				
 			}
 		
-	
+			if (app.mouseX > 17 && app.mouseX < 115 && app.mouseY > 11 && app.mouseY < 51) {
+				reiniciar();
+				pantalla = 4;
+			}
 			
 			
 	
@@ -625,6 +630,12 @@ public class Juego {
 		
 	}
 	
+	public void reiniciar () {
+		 ash.setPosX(600);
+		 ash.setPosY(150);
+		 
+	}
+	
 	
 	public void laExceptionNombre (String a, boolean b) throws ExceptionNombre {
 		if ((a.equals(""))&&(b==true)) {
@@ -635,7 +646,7 @@ public class Juego {
 	}
 	
 	
-	
+	/////////////////GETTERS AND SETTERS ////////////////////////////////////
 
 	public PApplet getApp() {
 		return app;
