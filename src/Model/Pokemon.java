@@ -21,12 +21,18 @@ public abstract class Pokemon implements Runnable{
 		this.posY = posY;
 		this.app = app;
 		this.vel = 5;
-		this.vida = 8;
+		this.vida = 163;
 		this.dir = 1;
 	}
 	
 	
 	
+	public int getTipo() {
+		return tipo;
+	}
+
+
+
 	//metodos
 	public void mover() {
 		if(this.dir == 1) {
