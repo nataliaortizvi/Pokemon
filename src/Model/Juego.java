@@ -45,9 +45,9 @@ public class Juego {
 
 	Bueno perso;
 	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige,pokeSalir, 
+
 		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF, pokebola,escribeNombre,
 		   ataqueR;
-
 		   
 
 	
@@ -70,6 +70,9 @@ public class Juego {
 	int xLab;
 	int yLab;
 	int moveLab;
+	
+	boolean usarPokebola,pokebolaUsada;
+	int movPoke;
 	
 	Bueno ash;
 	
@@ -125,7 +128,11 @@ public class Juego {
 		charmanderF = app.loadImage("images/charmander.png");
 		SnivyF = app.loadImage("images/snivy.png");
 		squirtleF = app.loadImage("images/squirtle.png");
-		pantalla = 0;
+		
+		
+		pantalla = 0; //////////////////////////PANTALLA//////////////////////////////////////////////////////////////
+		
+		
 		xLogica = 12;
 		yLogica = 4;
 		seMovio = 1;
@@ -142,24 +149,24 @@ public class Juego {
 		System.out.println();
 		pokemonAleatorio = (int) Math.floor(Math.random()*3);
 		pokemonsitos = new LinkedList<Pokemon>();
-		pokemonsotes = new LinkedList<Pokemon>();
+		
 		mios = new LinkedList<Pokemon>();
 	
 
 		
 		for(int i = 0; i < 1; i++) {
 			if(pokemonAleatorio == 0) {
-				pokemonsitos.add(new PokemonOne(0,50,50,app));
-				pokemonsotes.add(new PokemonOne(2,540,50,app));
+				pokemonsitos.add(new PokemonOne(50,50,app));
+				//pokemonsotes.add(new PokemonOne(2,540,50,app));
 				
 			}
 			if(pokemonAleatorio == 1) {
-				pokemonsitos.add(new PokemonTwo(0,50,50,app));
-				pokemonsotes.add(new PokemonTwo(2,530,50,app));
+				pokemonsitos.add(new PokemonTwo(50,50,app));
+				//pokemonsotes.add(new PokemonTwo(2,530,50,app));
 			}
 			if(pokemonAleatorio == 2) {
-				pokemonsitos.add(new PokemonThree(0,50,50,app));
-				pokemonsotes.add(new PokemonThree(2,524,45,app));
+				pokemonsitos.add(new PokemonThree(50,50,app));
+				//pokemonsotes.add(new PokemonThree(2,524,45,app));
 			}
 		}
 		
@@ -187,6 +194,12 @@ public class Juego {
 				;
 		
 		jugadores = new ArrayList <User> ();
+		
+		
+		//cosas batalla
+		
+		usarPokebola = false;
+		pokebolaUsada = false;
 
 	}
 	
@@ -237,7 +250,12 @@ public class Juego {
 				app.image(pokebolita,353+45+45,195,50,50);
 			}
 			
+			
+			
 			perso.pintar();
+			if(PApplet.dist(perso.getPosX(), perso.getPosY(),360, 250)<50) {
+				pantalla = 3;
+			}
 			
 			
 			
@@ -283,7 +301,7 @@ public class Juego {
 			
 			
 			for(int i = 0; i < pokemonsitos.size(); i++) {
-			pokemonsitos.get(i).pintar();
+			pokemonsitos.get(i).pintarAdelanteChiqui();
 			new Thread (pokemonsitos.get(i)).start();
 			
 			if(PApplet.dist(ash.getPosX(), ash.getPosY(), pokemonsitos.get(i).getPosX(), pokemonsitos.get(i).getPosY())<50) {
@@ -304,6 +322,7 @@ public class Juego {
 			//batalla
 			control.hide();
 			app.image(pantBatalla,0,0,800,500);
+			movPoke = (int)app.random(80,90);
 			
 			
 			if(app.mouseX > 367 && app.mouseX < 485 && app.mouseY > 417 && app.mouseY <477) {
@@ -312,12 +331,29 @@ public class Juego {
 			
 			
 			for(int j = 0; j < mios.size(); j++) {
-				mios.get(j).pintar();
+				mios.get(j).pintarAtras();
+			}
+	
+			
+			if(usarPokebola == true && pokebolaUsada == false) {
+				app.image(pokebola,706,400,movPoke,movPoke);
+			
 			}
 			
-			for(int i = 0; i < pokemonsotes.size(); i++) {
-				pokemonsotes.get(i).pintar();
+			if(pokebolaUsada == true) {
+				app.image(pokebola,718,412,65,65);
 			}
+			
+			for(int i = 0; i < pokemonsitos.size(); i++) {
+				pokemonsitos.get(i).pintarAdelante();
+				if(pokebolaUsada == true&&usarPokebola == true) {
+					ash.atrapacion();
+					ash.atrapacionLograda();
+					//new Thread (ash).start();
+				}
+			}
+			
+			
 			
 			
 			
@@ -435,13 +471,13 @@ public class Juego {
 				for(int j = 0; j < 1; j++) {
 					
 					if(tortu == true) {
-						mios.add(new PokemonTwo(1,60,85,app));
+						mios.add(new PokemonTwo(60,85,app));
 					}	
 					if(charman == true) {
-						mios.add(new PokemonOne(1,60,100,app));
+						mios.add(new PokemonOne(60,100,app));
 					}
 					if(planta == true) {
-						mios.add(new PokemonThree(1,95,140,app));
+						mios.add(new PokemonThree(95,140,app));
 					}
 				}
 				pantalla  ++;
@@ -460,17 +496,44 @@ public class Juego {
 		case 5:
 			//batalla
 			
-			if(app.mouseX > 367 && app.mouseX < 485 && app.mouseY > 417 && app.mouseY <477) {
+			
 			
 			for(int j = 0; j < mios.size(); j++) {
-			for(int i = 0; i < pokemonsotes.size(); i++) {
-				pokemonsotes.get(i).setVida((pokemonsotes.get(i).getVida())-mios.get(j).getAtaque());
+				for(int i = 0; i < pokemonsitos.size(); i++) {
+			if(app.mouseX > 367 && app.mouseX < 485 && app.mouseY > 417 && app.mouseY <477) {
+			
 				
-				//System.out.println(pokemonsotes.get(j).getVida());
+				if (pokemonsitos.get(i).getVida() > 20) {
+				pokemonsitos.get(i).setVida((pokemonsitos.get(i).getVida())-mios.get(j).getAtaque());
+				}
+				}
+				
+				if(pokemonsitos.get(i).getVida() <= 100) {
+				pokemonsitos.get(i).setR(242);
+				pokemonsitos.get(i).setG(187);
+				pokemonsitos.get(i).setB(34);
+				}
+				
+				if(pokemonsitos.get(i).getVida() <= 30) {
+					pokemonsitos.get(i).setR(242);
+					pokemonsitos.get(i).setG(98);
+					pokemonsitos.get(i).setB(34);
+					}
+				
+				if(pokemonsitos.get(i).getVida() < 70) {
+					usarPokebola = true;
+					if(app.mouseX >706 && app.mouseX < 791 && app.mouseY > 400 && app.mouseY < 485) {
+						pokebolaUsada = true;
+					}
+				}
+				
+				
+				
+				System.out.println(pokemonsitos.get(j).getVida());
 				//System.out.println(mios.get(i).getAtaque());
 				}
 			}
-		}
+		
 	
 			
 			
