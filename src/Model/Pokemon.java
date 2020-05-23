@@ -8,6 +8,7 @@ public abstract class Pokemon implements Runnable{
 	int tipo;
 	int posicion;
 	
+	
 	int nivel;
 	int posX;
 	int posY;
@@ -15,56 +16,40 @@ public abstract class Pokemon implements Runnable{
 	int vida, vel, dir;
 	PApplet app;
 	
-	public Pokemon(int tipo, int posX, int posY, PApplet app) {
-		this.tipo = tipo;
+	
+	int r,g,b;
+	
+	public Pokemon(int posX, int posY, PApplet app) {
+		
 		this.posX = posX;
 		this.posY = posY;
 		this.app = app;
 		this.vel = 5;
 		this.vida = 163;
 		this.dir = 1;
+	
+		
+		this.r = 89;
+		this.g = 210;
+		this.b = 129;
+	}
+	
+	public void run() {
+		mover();
+		
 	}
 	
 	
+	public void pintarAdelante() {
+		
+	}
 	
-	public int getTipo() {
-		return tipo;
-	}
-
-
-
-	//metodos
-	public void mover() {
-		if(this.dir == 1) {
-			this.posX += this.vel;
-			
-			if(this.posX > 280) {
-				this.dir = 2;
-			}
-			
-			if(this.posX < 10) {
-				this.dir = 2;
-			}
-		}
-		if(this.dir == 2) {
-			this.posY += this.vel;
-			
-			if(this.posY >180) {
-				this.dir = 1;
-				this.vel *= -1;
-			}
-			if(this.posY < 20) {
-				this.dir = 1;
-				this.vel *= -1;
-			}
-		}
-		
-		
-		
+	public void pintarAtras() {
 		
 	}
-	public void pintar() {
-		
+
+	public void pintarAdelanteChiqui() {
+	
 	}
 	
 	public void atacar() {
@@ -74,6 +59,82 @@ public abstract class Pokemon implements Runnable{
 	public void danio() {
 	}
 	
+	//metodos
+		public void mover() {
+			if(this.dir == 1) {
+				this.posX += this.vel;
+				
+				if(this.posX > 280) {
+					this.dir = 2;
+				}
+				
+				if(this.posX < 10) {
+					this.dir = 2;
+				}
+			}
+			if(this.dir == 2) {
+				this.posY += this.vel;
+				
+				if(this.posY >180) {
+					this.dir = 1;
+					this.vel *= -1;
+				}
+				if(this.posY < 20) {
+					this.dir = 1;
+					this.vel *= -1;
+				}
+			}
+			
+			
+			
+			
+		}
+	
+	public int getR() {
+		return r;
+	}
+
+
+
+	public int getG() {
+		return g;
+	}
+
+
+
+	public int getB() {
+		return b;
+	}
+
+
+
+	public void setR(int r) {
+		this.r = r;
+	}
+
+
+
+	public void setG(int g) {
+		this.g = g;
+	}
+
+
+
+	public void setB(int b) {
+		this.b = b;
+	}
+
+
+
+	public int getTipo() {
+		return tipo;
+	}
+
+
+
+	
+	
+	
 	
 	
 	
@@ -82,9 +143,7 @@ public abstract class Pokemon implements Runnable{
 		this.tipo = tipo;
 	}
 	
-	public void run() {
-		mover();
-	}
+	
 	public String getNom() {
 		return nom;
 	}
