@@ -114,7 +114,7 @@ public class Juego {
 		charmanderF = app.loadImage("images/charmander.png");
 		SnivyF = app.loadImage("images/snivy.png");
 		squirtleF = app.loadImage("images/squirtle.png");
-		pantalla = 2;
+		pantalla = 0;
 		xLogica = 12;
 		yLogica = 4;
 		seMovio = 1;
