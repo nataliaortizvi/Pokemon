@@ -48,7 +48,6 @@ public class Juego {
 		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF, pokebola,escribeNombre,ataqueR;
 
 
-	
 	ControlP5 control;
 	String usuario;
 	PFont font;
@@ -238,8 +237,10 @@ public class Juego {
 			
 			
 			perso.pintar();
-			if(PApplet.dist(perso.getPosX(), perso.getPosY(),360, 250)<50) {
-				pantalla = 3;
+			if(PApplet.dist(perso.getPosX(), perso.getPosY(),400, 250)<100) {
+				app.image(pokebolita,350,195,50,50);
+				app.image(pokebolita,353+45,195,50,50);
+				app.image(pokebolita,353+45+45,195,50,50);
 			}
 			
 			
