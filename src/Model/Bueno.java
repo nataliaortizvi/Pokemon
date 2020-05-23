@@ -38,11 +38,11 @@ public class Bueno extends Personaje implements Runnable{
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(3000);
-			
+		//	atrapacionLograda();
 			//System.out.println("holi");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-			atrapacionLograda();
+			
 		}
 	}
 	
