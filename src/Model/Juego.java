@@ -45,12 +45,14 @@ public class Juego {
 
 	Bueno perso;
 	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige,pokeSalir, 
-		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF,
-		   pokebola, ataqueR;
+		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF, pokebola,escribeNombre,ataqueR;
+
+
 	
 	ControlP5 control;
 	String usuario;
 	PFont font;
+	Malo brian;
 	
 	LinkedList<Pokemon> pokemonsitos, pokemonsotes;
 	LinkedList<Pokemon> mios;
@@ -79,6 +81,7 @@ public class Juego {
 		charman = false; 
 		tortu = false;
 		planta = false;
+		
 		 
 		perso = new Bueno(200,300,app);
 		charmanderF = app.loadImage("images/charmander.png");
@@ -102,7 +105,12 @@ public class Juego {
 		pokebolita = app.loadImage("images/pokebolita.png");
 		pokeSalir = app.loadImage("images/pokeSalir.png");
 		pokebola = app.loadImage("images/pokebola.png");
+
+		
+		escribeNombre = app.loadImage("images/escribeNombre.png");
+
 		ataqueR = app.loadImage("images/ataque.png");
+
 
 		
 
@@ -118,7 +126,11 @@ public class Juego {
 		charmanderF = app.loadImage("images/charmander.png");
 		SnivyF = app.loadImage("images/snivy.png");
 		squirtleF = app.loadImage("images/squirtle.png");
-		pantalla = 3;
+		
+		
+		pantalla = 0; //////////////////////////PANTALLA//////////////////////////////////////////////////////////////
+		
+		
 		xLogica = 12;
 		yLogica = 4;
 		seMovio = 1;
@@ -157,6 +169,7 @@ public class Juego {
 		}
 		
 		
+		brian = new Malo(200,300,app);
 
 		//cosas de registro
 		
@@ -170,7 +183,11 @@ public class Juego {
 				.setSize(297,69)
 				.setColor(app.color(255))
 				.setColorBackground(app.color(25,25,25,5))
+
+				.setColorCaptionLabel(app.color(25,25,25))
+
 				.setColorCaptionLabel(app.color(25,25,25,5))
+
 				.setFont(font)
 				;
 		
@@ -211,8 +228,9 @@ public class Juego {
 			usuario = "";
 			
 			if(escribaNombre == true) {
-				app.fill(255);
-				app.text("Agregue un nombre", 100,300);
+				
+				app.image(escribeNombre,65 ,365,350,70);
+				
 			}
 			
 			
@@ -230,7 +248,12 @@ public class Juego {
 				app.image(pokebolita,353+45+45,195,50,50);
 			}
 			
+			
+			
 			perso.pintar();
+			if(PApplet.dist(perso.getPosX(), perso.getPosY(),360, 250)<50) {
+				pantalla = 3;
+			}
 			
 			
 			
@@ -282,6 +305,13 @@ public class Juego {
 			if(PApplet.dist(ash.getPosX(), ash.getPosY(), pokemonsitos.get(i).getPosX(), pokemonsitos.get(i).getPosY())<50) {
 				pantalla = 5;
 				
+			}
+			brian.pintar();
+			new Thread (brian).start();
+			
+
+			if(PApplet.dist(ash.getPosX(), ash.getPosY(), brian.getPosX(), brian.getPosY())<50) {
+				pantalla = 5;
 			}
 		}
 		
