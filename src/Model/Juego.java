@@ -47,7 +47,7 @@ public class Juego {
 	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige,pokeSalir, 
 
 		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF, pokebola,escribeNombre,
-		   ataqueR;
+		   ataqueR, superAtaqueR;
 		   
 
 	ControlP5 control;
@@ -111,7 +111,7 @@ public class Juego {
 		escribeNombre = app.loadImage("images/escribeNombre.png");
 
 		ataqueR = app.loadImage("images/ataque.png");
-
+		superAtaqueR = app.loadImage("images/superAtaque.png");
 
 		
 
@@ -330,6 +330,10 @@ public class Juego {
 				app.image(ataqueR, 362, 413, 125, 65);
 			}
 			
+			if(app.mouseX > 501 && app.mouseX < 700 && app.mouseY > 417 && app.mouseY <477) {
+				app.image(superAtaqueR, 499, 413, 205, 65);
+			}
+			
 			
 			for(int j = 0; j < mios.size(); j++) {
 				mios.get(j).pintarAtras();
@@ -350,7 +354,7 @@ public class Juego {
 				if(pokebolaUsada == true&&usarPokebola == true) {
 					ash.atrapacion();
 					ash.atrapacionLograda();
-					//new Thread (ash).start();
+					new Thread (ash).start();
 				}
 			}
 			
