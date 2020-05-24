@@ -10,7 +10,7 @@ public class Bueno extends Personaje implements Runnable{
 	PImage perPerfilDer;
 	int cambiar;
 	int dir;
-	boolean capturado;
+	boolean capturado, mato;
 	int movPokeG;
 	PImage pokebolita;
 
@@ -23,7 +23,7 @@ public class Bueno extends Personaje implements Runnable{
 		this.capturado = false;
 		
 		cambiar = 1;
-		
+		mato = true;
 		perFrente = app.loadImage("images/buenoFront.png");
 		perBack = app.loadImage("images/buenoBack.png");
 		perPerfil = app.loadImage("images/buenoperfil.png");
@@ -33,22 +33,33 @@ public class Bueno extends Personaje implements Runnable{
 	
 	@Override
 	public void run() {
+		if(mato == true) {
 		
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(3000);
 			atrapacionLograda();
-			//System.out.println("holi");
+			//System.out.println("lograda osea que esta true el capturado");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
+	}
 
 	
+	public boolean isMato() {
+		return mato;
+	}
+
+	public void setMato(boolean mato) {
+		this.mato = mato;
+	}
+
 	public void atrapacionLograda() {
 		//app.image(this.capturacion,50,190, 700,100);
 		capturado = true;
 	}
+	
 	
 	public void atrapacion() {
 		this.movPokeG = (int) app.random(190,200);
