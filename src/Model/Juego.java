@@ -14,7 +14,7 @@ public class Juego {
 
 	int pokemonAleatorio;
 
-	boolean pokeelige,charman,planta,tortu,pokedexSalir;
+	boolean pokeelige,charman,planta,tortu,pokedexSalir,derrotado;
 
 	PApplet app;
 	
@@ -72,6 +72,7 @@ public class Juego {
 	int movPoke;
 	
 	Bueno ash;
+	PokemonFour evvy;
 	
 	public Juego(PApplet app) {
 		pokedexSalir = false;
@@ -115,6 +116,7 @@ public class Juego {
 
 		//variables juego
 		ash = new Bueno (600, 150, app);
+		evvy = new PokemonFour(2,530,app);
 		
 		pokeelige = false;
 		charman = false; 
@@ -197,6 +199,7 @@ public class Juego {
 		
 		usarPokebola = false;
 		pokebolaUsada = false;
+		derrotado = false;
 
 	}
 	
@@ -312,7 +315,7 @@ public class Juego {
 			
 
 			if(PApplet.dist(ash.getPosX(), ash.getPosY(), brian.getPosX(), brian.getPosY())<50) {
-				pantalla = 5;
+				pantalla = 7;
 			}
 		}
 		
@@ -370,7 +373,43 @@ public class Juego {
 			
 			
 			break;
+		case 7:
+			//batalla del malo brian
+			//batalla
+			control.hide();
+			app.image(pantBatalla,0,0,800,500);
+			movPoke = (int)app.random(80,90);
+			
+			
+			if(app.mouseX > 367 && app.mouseX < 485 && app.mouseY > 417 && app.mouseY <477) {
+				app.image(ataqueR, 362, 413, 125, 65);
+			}
+			
+			
+			for(int j = 0; j < mios.size(); j++) {
+				mios.get(j).pintarAtras();
+			}
+	
+			
+			if(usarPokebola == true && pokebolaUsada == false) {
+				app.image(pokebola,706,400,movPoke,movPoke);
+			
+			}
+			
+			if(pokebolaUsada == true) {
+				app.image(pokebola,718,412,65,65);
+			}
+				evvy.pintarAdelante();
+				
+			if (derrotado == true) {
+				brian.derrotado();
+			}
+			
+			
 		}
+			
+			
+		
 		
 		app.fill(0);
 		app.textSize(10);
@@ -546,6 +585,45 @@ public class Juego {
 			}
 			
 			break;
+			
+		case 7:
+//batalla Con el malo
+			
+			
+			
+			for(int j = 0; j < mios.size(); j++) {
+				for(int i = 0; i < pokemonsitos.size(); i++) {
+			if(app.mouseX > 367 && app.mouseX < 485 && app.mouseY > 417 && app.mouseY <477) {
+			
+				
+				if (evvy.getVida() > 10) {
+				evvy.setVida((evvy.getVida())-mios.get(j).getAtaque());
+			
+				}
+				}
+				
+				if(evvy.getVida() <= 100) {
+				evvy.setR(242);
+				evvy.setG(187);
+			evvy.setB(34);
+				}
+				
+				if(evvy.getVida() <= 30) {
+					evvy.setR(242);
+					evvy.setG(98);
+					evvy.setB(34);
+					}
+				
+				if(evvy.getVida() <= 20) {
+					derrotado = true;
+				
+				}
+				
+				System.out.println(pokemonsitos.get(j).getVida());
+				//System.out.println(mios.get(i).getAtaque());
+				}
+			}
+		
 		}
 		
 	}

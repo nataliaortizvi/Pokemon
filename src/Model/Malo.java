@@ -8,16 +8,20 @@ public class Malo extends Personaje implements Runnable {
 	PImage maloFrente;
 	PImage maloBack;
 	PImage maloPerfilDer;
-	PImage maloPerfilIzq;
+	PImage maloPerfilIzq, mensajeMalo;
 	int dir;
 	public Malo (int posX, int posY, PApplet app) {
 		super (posX, posY, app);
 		maloFrente = app.loadImage("images/maloFront.png");
+		mensajeMalo = app.loadImage("images/mensajeMalo.png");
 		//maloPerfilDer = app.loadImage("images/maloPerfilDer.png");
 		//maloPerfilIzq = app.loadImage("images/Malo Perfil.png");
 		this.dir = 1;
 		this.vel = 3;
 		cambiarMalo = 1;
+	}
+	public void derrotado () {
+		app.image(mensajeMalo,300,50,400,200);
 	}
 	
 	public void pintar () {
@@ -71,7 +75,7 @@ public class Malo extends Personaje implements Runnable {
 		
 	}
 
-	@Override
+
 	public void run() {
 		// TODO Auto-generated method stub
 		mover();
