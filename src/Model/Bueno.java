@@ -13,7 +13,6 @@ public class Bueno extends Personaje implements Runnable{
 	boolean capturado;
 	int movPokeG;
 	PImage pokebolita;
-	
 
 	public Bueno ( int posX, int posY, PApplet app) {
 
@@ -34,15 +33,17 @@ public class Bueno extends Personaje implements Runnable{
 	
 	@Override
 	public void run() {
+		
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(3000);
 			atrapacionLograda();
-			System.out.println("holi");
+			//System.out.println("holi");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
+
 	
 	public void atrapacionLograda() {
 		//app.image(this.capturacion,50,190, 700,100);
