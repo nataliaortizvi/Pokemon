@@ -10,10 +10,9 @@ public class Bueno extends Personaje implements Runnable{
 	PImage perPerfilDer;
 	int cambiar;
 	int dir;
-	boolean capturado;
+	boolean capturado, mato;
 	int movPokeG;
 	PImage pokebolita;
-	
 
 	public Bueno ( int posX, int posY, PApplet app) {
 
@@ -22,6 +21,7 @@ public class Bueno extends Personaje implements Runnable{
 		this.pokebolita = app.loadImage("images/pokebola.png");
 		//this.capturacion = app.loadImage("images/capturaste.png");
 		this.capturado = false;
+		this.mato = true;
 		
 		cambiar = 1;
 		
@@ -34,15 +34,19 @@ public class Bueno extends Personaje implements Runnable{
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		try {
-			Thread.sleep(3000);
-			atrapacionLograda();
-			System.out.println("holi");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		
+		if (mato == true) {
+			
+			try {
+				Thread.sleep(3000);
+				atrapacionLograda();
+				//System.out.println("holi");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
+
 	
 	public void atrapacionLograda() {
 		//app.image(this.capturacion,50,190, 700,100);
@@ -192,6 +196,16 @@ public class Bueno extends Personaje implements Runnable{
 	public void setDir(int dir) {
 		this.dir = dir;
 	}
+
+	public boolean isMato() {
+		return mato;
+	}
+
+	public void setMato(boolean mato) {
+		this.mato = mato;
+	}
+	
+	
 
 
 	

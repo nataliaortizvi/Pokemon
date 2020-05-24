@@ -12,7 +12,7 @@ public class PokemonFour extends Pokemon{
 	
 		this.nom = "Eevee";
 		this.nivel = 5;
-		this.ataque = 35;
+		this.ataque = 30;
 		
 		evvyFrente = app.loadImage("images/evvy.png");
 		evvyBack = app.loadImage("images/evvyBack.png");

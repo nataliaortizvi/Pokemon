@@ -14,7 +14,7 @@ public class PokemonTwo extends Pokemon{
 		
 		this.nom = "Squirtle";
 		this.nivel = 3;
-		this.ataque = 30;
+		this.ataque = 25;
 		this.tipo = 2;
 		
 		squirtleFrente = app.loadImage("images/squirtle.png");
