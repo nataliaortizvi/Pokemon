@@ -415,6 +415,8 @@ public class Juego {
 			
 			}
 			
+			
+			
 			if(pokebolaUsada == true) {
 				app.image(pokebola,718,412,65,65);
 				salir = true;
@@ -431,16 +433,21 @@ public class Juego {
 					new Thread (ash).start();
 					ash.atrapacion();
 					if(ash.isCapturado() == true) {
+						app.image(fondo,0,0,800,500);
 						app.image(this.captura,50,190, 700,100);
+						if (salir == true) {
+							app.image(exit,17, 11);
+						}
+						if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
+							app.image(exit,14, 10,125,65);
+						}
 					}
 				}
 			}
 			
 			
 			
-			if (salir == true) {
-				app.image(exit,17, 11);
-			}
+			
 			
 			break;
 		case 6:
@@ -458,11 +465,7 @@ public class Juego {
 					for (int i = 0; i < pokedex.size(); i++) {
 						for (int j = 0; j < pokemonsitos.size(); j++) {
 							pokedex.get(i).pintarAdelanteChiqui();
-							
-							
-						
-							
-								}
+						}
 					}
 				}
 				
@@ -478,12 +481,6 @@ public class Juego {
 					app.image(snivyText, 468, 148);
 				}
 				
-			
-				
-			
-			
-			
-			
 			break;
 		case 7:
 			//batalla del malo brian
