@@ -29,6 +29,7 @@ public class PokemonOne extends Pokemon{
 		app.rect(306,78,167,17);
 		app.fill(this.r, this.g,this.b);
 		app.rect(308,80,this.vida,13);
+		
 		//nivel
 		app.fill(28,82,47);
 		app.textSize(16);
@@ -47,7 +48,7 @@ public class PokemonOne extends Pokemon{
 		app.noStroke();
 		app.rect(506,316,167,17);
 		
-		app.fill(89,210,129);
+		app.fill(this.r, this.g,this.b);
 		app.rect(508,318,this.vida,13);
 		
 		//nivel

@@ -46,7 +46,7 @@ public class Juego {
 	Bueno perso;
 	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige,pokeSalir, 
 		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF, pokebola,escribeNombre,
-		   ataqueR, superAtaqueR, exit, captura, tortuText, charmaText, snivyText;
+		   ataqueR, superAtaqueR, exit, captura, tortuText, charmaText, snivyText, fondo;
 		   
 
 	ControlP5 control;
@@ -122,6 +122,7 @@ public class Juego {
 		tortuText = app.loadImage("images/tortuText.png"); 
 		charmaText = app.loadImage("images/charmaText.png");
 		snivyText = app.loadImage("images/snivyText.png");
+		fondo = app.loadImage("images/zona.png");
 		
 		//variables juego
 		ash = new Bueno (600, 150, app);
@@ -184,7 +185,9 @@ public class Juego {
 		}
 		
 		
+		if (derrotado == false) {
 		brian = new Malo(200,300,app);
+		}
 
 		//cosas de registro
 		
@@ -325,12 +328,12 @@ public class Juego {
 			if (derrotado == false) {
 			brian.pintar();
 			new Thread (brian).start();
-			}
-			
-
 			if(PApplet.dist(ash.getPosX(), ash.getPosY(), brian.getPosX(), brian.getPosY())<50) {
 				pantalla = 7;
 			}
+			}
+			
+			
 		}
 		
 			break;
@@ -570,14 +573,14 @@ public class Juego {
 				break;
 			
 		case 8:  
-			
-			app.image(pantBatalla,0,0,800,500);
+			control.hide();
+			app.image(fondo,0,0,800,500);
 			brian.derrotado();
-			app.image(exit,17, 11);
+			app.image(exit,17, 5);
 			salir = true;
 
 			if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
-				app.image(exit,15, 11,120,70);
+				app.image(exit,14, 5,125,65);
 			}
 			break;
 		
@@ -843,10 +846,6 @@ public class Juego {
 		if (pokebolaUsada == true) {
 			
 			if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
-			
-				
-			
-				
 				reiniciar();
 				pantalla = 4;
 				
@@ -953,12 +952,11 @@ public class Juego {
 			
 		case 8: 
 			//pantalla derrotado el malo
-			
-			
-			
+		
 			if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
 					reiniciar();
 					pantalla = 4;
+					derrotado = true;
 			
 			break;
 			}
@@ -1039,6 +1037,7 @@ public class Juego {
 	}
 	
 	public void reiniciar () {
+				
 		 ash.setPosX(600);
 		 ash.setPosY(150);
 		 xLogica = 12;

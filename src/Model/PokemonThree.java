@@ -43,7 +43,7 @@ public class PokemonThree extends Pokemon{
 			app.noStroke();
 			app.rect(506,316,167,17);
 			
-			app.fill(89,210,129);
+			app.fill(this.r, this.g,this.b);
 			app.rect(508,318,this.vida,13);
 			
 			//nivel
