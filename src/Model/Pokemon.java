@@ -16,6 +16,7 @@ public abstract class Pokemon implements Runnable{
 	int vida, vel, dir;
 	PApplet app;
 	
+	boolean estaEnBatalla;
 	
 	int r,g,b;
 	
@@ -27,7 +28,7 @@ public abstract class Pokemon implements Runnable{
 		this.vel = 5;
 		this.vida = 163;
 		this.dir = 1;
-	
+		this.estaEnBatalla = false;
 		
 		this.r = 89;
 		this.g = 210;
@@ -36,6 +37,17 @@ public abstract class Pokemon implements Runnable{
 	
 	public void run() {
 		mover();
+		
+		if(estaEnBatalla == true) {
+		try {
+			Thread.sleep(2000);
+			serAtacado();
+			//System.out.println("holi");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			
+		}
+		}
 		
 	}
 	
@@ -52,11 +64,8 @@ public abstract class Pokemon implements Runnable{
 	
 	}
 	
-	public void atacar() {
-		
-	}
-	
-	public void danio() {
+	public void serAtacado() {
+		this.vida -= 20;
 	}
 	
 	//metodos
@@ -90,6 +99,14 @@ public abstract class Pokemon implements Runnable{
 			
 		}
 	
+	public boolean isEstaEnBatalla() {
+			return estaEnBatalla;
+		}
+
+	public void setEstaEnBatalla(boolean estaEnBatalla) {
+			this.estaEnBatalla = estaEnBatalla;
+		}
+
 	public int getR() {
 		return r;
 	}

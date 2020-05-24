@@ -3,7 +3,7 @@ package Model;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Bueno extends Personaje {
+public class Bueno extends Personaje implements Runnable{
 	PImage perFrente;
 	PImage perBack;
 	PImage perPerfil;
@@ -11,12 +11,16 @@ public class Bueno extends Personaje {
 	int cambiar;
 	int dir;
 
+	int movPokeG;
+	PImage pokebolita, capturacion;
 	
 
 	public Bueno ( int posX, int posY, PApplet app) {
 
 		super (posX, posY,app);
 		this.vel = 50;
+		this.pokebolita = app.loadImage("images/pokebola.png");
+		this.capturacion = app.loadImage("images/capturaste.png");
 		
 		
 		cambiar = 1;
@@ -30,9 +34,26 @@ public class Bueno extends Personaje {
 	}
 	
 	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(3000);
+		//	atrapacionLograda();
+			//System.out.println("holi");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			
+		}
+	}
 	
+	public void atrapacionLograda() {
+		app.image(this.capturacion,50,190, 700,100);
+	}
 	
-	
+	public void atrapacion() {
+		this.movPokeG = (int) app.random(190,200);
+		app.image(pokebolita,500,30,movPokeG,movPokeG);
+	}
 	
 	
 	public void pintar () {

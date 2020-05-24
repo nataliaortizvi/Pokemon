@@ -70,10 +70,12 @@ public class Juego {
 	int yLab;
 	int moveLab;
 	
-	boolean usarPokebola,pokebolaUsada;
+	boolean usarPokebola,pokebolaUsada, superClic, puedeUsar, usado;
 	int movPoke;
 	
 	Bueno ash;
+	
+	int puntos;
 	
 	public Juego(PApplet app) {
 		pokedexSalir = false;
@@ -129,7 +131,7 @@ public class Juego {
 		squirtleF = app.loadImage("images/squirtle.png");
 		
 		
-		pantalla = 0; //////////////////////////PANTALLA//////////////////////////////////////////////////////////////
+		pantalla = 3; //////////////////////////PANTALLA//////////////////////////////////////////////////////////////
 		
 		
 		xLogica = 12;
@@ -199,6 +201,9 @@ public class Juego {
 		
 		usarPokebola = false;
 		pokebolaUsada = false;
+		puntos = 5;
+		superClic =false;
+		usado = true;
 
 	}
 	
@@ -309,6 +314,7 @@ public class Juego {
 				pantalla = 5;
 				
 			}
+			
 			brian.pintar();
 			new Thread (brian).start();
 			
@@ -326,6 +332,59 @@ public class Juego {
 			movPoke = (int)app.random(80,90);
 			
 			
+			
+			if(puntos < 65) {
+			app.fill(255);
+			app.rect(645,10, 75, 20);
+			app.fill(28,82,47);
+			app.textSize(15);
+			app.text("SUPER",730,20);
+			app.text("ATAQUE",730,35);
+			app.fill(28,82,47);
+			app.rect(650,15, puntos, 10);
+			}
+			
+			if(puntos >= 65 && usado == true) {
+				app.fill(255);
+				app.rect(645,10, 75, 20);
+				app.fill(355,0,0);
+				app.rect(650,15, puntos, 10);
+				app.textSize(15);
+				app.text("SUPER",730,20);
+				app.text("ATAQUE",730,35);
+			}
+			
+			
+			
+			if(puedeUsar == false) {
+				
+			try {
+				laExceptionSuperAtaque (puntos,superClic);
+			} catch (ExceptionNombre e) {
+				//System.out.println(e.getMessage());
+				app.fill(28,82,47);
+				app.textSize(12);
+				app.text(e.getMessage(),410,20);
+				
+			}
+			}
+			
+			if(puntos >= 65) {
+				puedeUsar = true;
+			}
+			
+			try {
+				laExceptionAtaqueUsado (usado);
+			} catch (Exception e) {
+				// TODO: handle exception
+				app.fill(28,82,47);
+				app.textSize(13);
+				app.text(e.getMessage(),625,16);
+			}
+			
+			System.out.println(puedeUsar);
+			
+			
 			if(app.mouseX > 367 && app.mouseX < 485 && app.mouseY > 417 && app.mouseY <477) {
 				app.image(ataqueR, 362, 413, 125, 65);
 			}
@@ -333,6 +392,7 @@ public class Juego {
 			if(app.mouseX > 501 && app.mouseX < 700 && app.mouseY > 417 && app.mouseY <477) {
 				app.image(superAtaqueR, 499, 413, 205, 65);
 			}
+			
 			
 			
 			for(int j = 0; j < mios.size(); j++) {
@@ -353,8 +413,8 @@ public class Juego {
 				pokemonsitos.get(i).pintarAdelante();
 				if(pokebolaUsada == true&&usarPokebola == true) {
 					ash.atrapacion();
-					ash.atrapacionLograda();
-					new Thread (ash).start();
+					//ash.atrapacionLograda();
+					//new Thread (ash).start();
 				}
 			}
 			
@@ -501,18 +561,25 @@ public class Juego {
 		case 5:
 			//batalla
 			
-			
-			
 			for(int j = 0; j < mios.size(); j++) {
 				for(int i = 0; i < pokemonsitos.size(); i++) {
+					
+			//ATAQUE
 			if(app.mouseX > 367 && app.mouseX < 485 && app.mouseY > 417 && app.mouseY <477) {
-			
+				
+				mios.get(j).isEstaEnBatalla();
+				mios.get(j).setEstaEnBatalla(true);
+				new Thread (mios.get(j)).start();
 				
 				if (pokemonsitos.get(i).getVida() > 20) {
 				pokemonsitos.get(i).setVida((pokemonsitos.get(i).getVida())-mios.get(j).getAtaque());
-				}
-				}
 				
+				if(puntos < 65) {
+				puntos += 30;
+				}
+			}
+		}
+				//CAMBIOS DE COLOR EN LA BARRA DE VIDA
 				if(pokemonsitos.get(i).getVida() <= 100) {
 				pokemonsitos.get(i).setR(242);
 				pokemonsitos.get(i).setG(187);
@@ -520,10 +587,10 @@ public class Juego {
 				}
 				
 				if(pokemonsitos.get(i).getVida() <= 30) {
-					pokemonsitos.get(i).setR(242);
-					pokemonsitos.get(i).setG(98);
-					pokemonsitos.get(i).setB(34);
-					}
+				pokemonsitos.get(i).setR(242);
+				pokemonsitos.get(i).setG(98);
+				pokemonsitos.get(i).setB(34);
+				}
 				
 				if(pokemonsitos.get(i).getVida() < 70) {
 					usarPokebola = true;
@@ -533,8 +600,39 @@ public class Juego {
 				}
 				
 				
+				//SUPER ATAQUE
+				if(app.mouseX > 501 && app.mouseX < 700 && app.mouseY > 417 && app.mouseY <477) {
+					superClic = true;
+					
+					
+					if(puedeUsar == true) {
+						if (pokemonsitos.get(i).getVida() > 20) {
+							if(usado == true) {
+						pokemonsitos.get(i).setVida((pokemonsitos.get(i).getVida())-50);
+						mios.get(j).isEstaEnBatalla();
+						mios.get(j).setEstaEnBatalla(true);
+						
+						new Thread (mios.get(j)).start();
+						usado = false;
+						
+						if(pokemonsitos.get(i).getVida() <= 100) {
+							pokemonsitos.get(i).setR(242);
+							pokemonsitos.get(i).setG(187);
+							pokemonsitos.get(i).setB(34);
+							}
+							
+							if(pokemonsitos.get(i).getVida() <= 30) {
+							pokemonsitos.get(i).setR(242);
+							pokemonsitos.get(i).setG(98);
+							pokemonsitos.get(i).setB(34);
+							}
+							}
+						}
+					}
+				}
 				
-				System.out.println(pokemonsitos.get(j).getVida());
+				
+				//System.out.println(pokemonsitos.get(j).getVida());
 				//System.out.println(mios.get(i).getAtaque());
 				}
 			}
@@ -630,6 +728,7 @@ public class Juego {
 	}
 	
 	
+	//EXCEPCION DEL NOMBRE EN EL REGITRO
 	public void laExceptionNombre (String a, boolean b) throws ExceptionNombre {
 		if ((a.equals(""))&&(b==true)) {
 			throw new ExceptionNombre("Debe agregar su nombre");
@@ -638,9 +737,27 @@ public class Juego {
 		}
 	}
 	
+	//EXCEPCION DE QUE NO PUEDE USAR EL ATAQUE HASTA LLENAR LA BARRA
+	public void laExceptionSuperAtaque (int a, boolean b) throws ExceptionNombre {
+		if ((a <= 65)&&(b == true)) {
+			throw new ExceptionNombre("Para usar el super ataque llene la barra");
+		} 
+		
+	}
+	
+	//EXEPCION DE QUE SOLO TIENE 1 SUPER ATAQUE
+	public void laExceptionAtaqueUsado (boolean a) throws ExceptionNombre {
+		if (a == false) {
+			throw new ExceptionNombre("Solo tienes 1 Super ataque");
+		} 
+		
+	}
+	
+	
 	
 	
 
+	//GETTERS Y SETTERS
 	public PApplet getApp() {
 		return app;
 	}
