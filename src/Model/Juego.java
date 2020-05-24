@@ -136,7 +136,7 @@ public class Juego {
 		squirtleF = app.loadImage("images/squirtle.png");
 		
 		
-		pantalla = 0; //////////////////////////PANTALLA//////////////////////////////////////////////////////////////
+		pantalla = 3; //////////////////////////PANTALLA//////////////////////////////////////////////////////////////
 		
 		xLab = 7;
 		yLab = 8;
@@ -679,7 +679,7 @@ public class Juego {
 		}
 			
 				//CAMBIOS DE COLOR EN LA BARRA DE VIDA
-				if(pokemonsitos.get(i).getVida() <= 100) {
+				if(pokemonsitos.get(i).getVida() <= 100 ) {
 				pokemonsitos.get(i).setR(242);
 				pokemonsitos.get(i).setG(187);
 				pokemonsitos.get(i).setB(34);
@@ -691,7 +691,19 @@ public class Juego {
 				pokemonsitos.get(i).setB(34);
 				}
 				
-				if(pokemonsitos.get(i).getVida() < 70) {
+				if (mios.get(j).getVida() <= 100) {
+					mios.get(j).setR(242);
+					mios.get(j).setG(187);
+					mios.get(j).setB(34);
+				}
+				
+				if (mios.get(j).getVida() <= 30) {
+					mios.get(j).setR(242);
+					mios.get(j).setG(187);
+					mios.get(j).setB(34);
+				}
+				
+				if(pokemonsitos.get(i).getVida() < 70 || mios.get(i).getVida() <= 100) {
 					usarPokebola = true;
 					if(app.mouseX >706 && app.mouseX < 791 && app.mouseY > 400 && app.mouseY < 485) {
 						pokebolaUsada = true;
@@ -920,28 +932,49 @@ public class Juego {
 		 yLogica = 4;
 		 salir = false;
 		 for (int i = 0; i < pokemonsitos.size(); i++) {
-			 pokemonsitos.get(i).setVida(163);
-		
-			 pokemonsitos.get(i).setR(0);
-			 pokemonsitos.get(i).setG(218);
-			 pokemonsitos.get(i).setB(124);
+			 for (int j = 0; j < mios.size(); j++) {
+				 
+				 pokemonsitos.get(i).setVida(163);
+				 
+				 pokemonsitos.get(i).setR(0);
+				 pokemonsitos.get(i).setG(218);
+				 pokemonsitos.get(i).setB(124);
+				 
+				 if(pokemonsitos.get(i).getVida() <= 100) {
+					 pokemonsitos.get(i).setR(242);
+					 pokemonsitos.get(i).setG(187);
+					 pokemonsitos.get(i).setB(34);
+				 }
+				 
+				 if(pokemonsitos.get(i).getVida() <= 30) {
+					 pokemonsitos.get(i).setR(242);
+					 pokemonsitos.get(i).setG(98);
+					 pokemonsitos.get(i).setB(34);
+				 }
+				 
+				 usarPokebola = false;
+				 pokebolaUsada = false;
+				 pokemonsitos.remove();
+				 
+				 mios.get(j).setVida(163);
+				 mios.get(j).setR(0);
+				 mios.get(j).setG(218);
+				 mios.get(j).setB(124);
+				 
+				 if(mios.get(j).getVida() <= 100) {
+					 mios.get(j).setR(242);
+					 mios.get(j).setG(187);
+					 mios.get(j).setB(34);
+				 }
+				 if(mios.get(j).getVida() <= 30) {
+					 mios.get(j).setR(242);
+					 mios.get(j).setG(98);
+					 mios.get(j).setB(34);
+				 }
+			 }
+			 }
 			 
-			 if(pokemonsitos.get(i).getVida() <= 100) {
-					pokemonsitos.get(i).setR(242);
-					pokemonsitos.get(i).setG(187);
-					pokemonsitos.get(i).setB(34);
-					}
-					
-					if(pokemonsitos.get(i).getVida() <= 30) {
-						pokemonsitos.get(i).setR(242);
-						pokemonsitos.get(i).setG(98);
-						pokemonsitos.get(i).setB(34);
-						}
-			 usarPokebola = false;
-			 pokebolaUsada = false;
-			 pokemonsitos.remove();
-			 
-		 }
+		 
 		 pokemonAleatorio = (int) Math.floor(Math.random()*3);
 		 
 		 for(int i = 0; i < 1; i++) {
