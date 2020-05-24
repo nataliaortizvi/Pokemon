@@ -59,7 +59,7 @@ public class Bueno extends Personaje implements Runnable{
 	public void pintar () {
 		switch(cambiar){
 
-		case 1: app.image(perFrente,posX,posY,30,75);
+		case 1: app.image(perFrente,posX,posY,40,70);
 		break;
 		case 2: app.image(perBack,posX,posY,30,75);
 		break;

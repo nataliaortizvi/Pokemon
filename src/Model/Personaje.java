@@ -21,13 +21,13 @@ public abstract class Personaje {
 		
 	}
 	
+	
+	
 	public void pintar () {
 		
 	}
 	
-	public void atrapar () {
-		
-	}
+	
 	
 	//Getters and setters
 
