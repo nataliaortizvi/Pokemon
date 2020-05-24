@@ -14,6 +14,7 @@ public class PokemonOne extends Pokemon{
 		this.nom = "Charmander";
 		this.nivel = 2;
 		this.ataque = 20;
+		this.tipo = 1;
 		
 		charmanderFrente = app.loadImage("images/charmander.png");
 		charmanderBack = app.loadImage("images/charmanderBack.png");
