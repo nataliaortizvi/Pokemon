@@ -416,9 +416,13 @@ public class Juego {
 				app.image(pokebola,718,412,65,65);
 			}
 				evvy.pintarAdelante();
+				if (salir == true) {
+					app.image(exit,17, 11);
+				}
 				
 			if (derrotado == true) {
 				brian.derrotado();
+				salir = true;
 			}
 			
 			
@@ -643,6 +647,11 @@ public class Juego {
 				System.out.println(pokemonsitos.get(j).getVida());
 				//System.out.println(mios.get(i).getAtaque());
 				}
+				if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
+					reiniciar();
+					pantalla = 4;
+				}
+				
 			}
 		
 		}
