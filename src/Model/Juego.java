@@ -47,7 +47,7 @@ public class Juego {
 	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige,pokeSalir, 
 
 		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF, pokebola,escribeNombre,
-		   ataqueR;
+		   ataqueR, superAtaqueR, exit;
 		   
 
 	ControlP5 control;
@@ -60,8 +60,8 @@ public class Juego {
 	
 	ArrayList <User> jugadores;
 	
-	int pantalla;
-	boolean seguir, clicR, escribaNombre;
+	int pantalla; 
+	boolean seguir, clicR, escribaNombre, salir;
 	
 	int xLogica;
 	int yLogica;
@@ -69,6 +69,7 @@ public class Juego {
 	int xLab;
 	int yLab;
 	int moveLab;
+	int posXash;
 	
 	boolean usarPokebola,pokebolaUsada;
 	int movPoke;
@@ -106,12 +107,13 @@ public class Juego {
 		pokebolita = app.loadImage("images/pokebolita.png");
 		pokeSalir = app.loadImage("images/pokeSalir.png");
 		pokebola = app.loadImage("images/pokebola.png");
+		exit = app.loadImage("images/exit.png");
 
 		
 		escribeNombre = app.loadImage("images/escribeNombre.png");
 
 		ataqueR = app.loadImage("images/ataque.png");
-
+		superAtaqueR = app.loadImage("images/superAtaque.png");
 
 		
 
@@ -122,6 +124,7 @@ public class Juego {
 		charman = false; 
 		tortu = false;
 		planta = false;
+		salir = false;
 		
 		perso = new Bueno(350,400,app);
 		charmanderF = app.loadImage("images/charmander.png");
@@ -129,8 +132,11 @@ public class Juego {
 		squirtleF = app.loadImage("images/squirtle.png");
 		
 		
-		pantalla = 0; //////////////////////////PANTALLA//////////////////////////////////////////////////////////////
+		pantalla = 3; //////////////////////////PANTALLA//////////////////////////////////////////////////////////////
 		
+		xLab = 7;
+		yLab = 8;
+		moveLab = 1;
 		
 		xLogica = 12;
 		yLogica = 4;
@@ -141,9 +147,7 @@ public class Juego {
 		escribaNombre = false;
 		
 
-		xLab = 7;
-		yLab = 8;
-		moveLab = 1;
+		
 
 		System.out.println();
 		pokemonAleatorio = (int) Math.floor(Math.random()*3);
@@ -330,6 +334,10 @@ public class Juego {
 				app.image(ataqueR, 362, 413, 125, 65);
 			}
 			
+			if(app.mouseX > 501 && app.mouseX < 700 && app.mouseY > 417 && app.mouseY <477) {
+				app.image(superAtaqueR, 499, 413, 205, 65);
+			}
+			
 			
 			for(int j = 0; j < mios.size(); j++) {
 				mios.get(j).pintarAtras();
@@ -343,15 +351,20 @@ public class Juego {
 			
 			if(pokebolaUsada == true) {
 				app.image(pokebola,718,412,65,65);
+				salir = true;
 			}
 			
 			for(int i = 0; i < pokemonsitos.size(); i++) {
 				pokemonsitos.get(i).pintarAdelante();
 				if(pokebolaUsada == true&&usarPokebola == true) {
 					ash.atrapacion();
-					ash.atrapacionLograda();
-					//new Thread (ash).start();
+				//	ash.atrapacionLograda();
+					new Thread (ash).start();
 				}
+			}
+			
+			if (salir == true) {
+				app.image(exit,17, 11);
 			}
 			
 			
@@ -537,7 +550,7 @@ public class Juego {
 				
 			}
 		
-			if (app.mouseX > 17 && app.mouseX < 115 && app.mouseY > 11 && app.mouseY < 51) {
+			if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
 				reiniciar();
 				pantalla = 4;
 			}
@@ -633,6 +646,49 @@ public class Juego {
 	public void reiniciar () {
 		 ash.setPosX(600);
 		 ash.setPosY(150);
+		 xLogica = 12;
+		 yLogica = 4;
+		 salir = false;
+		 for (int i = 0; i < pokemonsitos.size(); i++) {
+			 pokemonsitos.get(i).setVida(163);
+		
+			 pokemonsitos.get(i).setR(0);
+			 pokemonsitos.get(i).setG(218);
+			 pokemonsitos.get(i).setB(124);
+			 
+			 if(pokemonsitos.get(i).getVida() <= 100) {
+					pokemonsitos.get(i).setR(242);
+					pokemonsitos.get(i).setG(187);
+					pokemonsitos.get(i).setB(34);
+					}
+					
+					if(pokemonsitos.get(i).getVida() <= 30) {
+						pokemonsitos.get(i).setR(242);
+						pokemonsitos.get(i).setG(98);
+						pokemonsitos.get(i).setB(34);
+						}
+			 usarPokebola = false;
+			 pokebolaUsada = false;
+			 pokemonsitos.remove();
+			 
+		 }
+		 pokemonAleatorio = (int) Math.floor(Math.random()*3);
+		 
+		 for(int i = 0; i < 1; i++) {
+				if(pokemonAleatorio == 0) {
+					pokemonsitos.add(new PokemonOne(50,50,app));
+					//pokemonsotes.add(new PokemonOne(2,540,50,app));
+					
+				}
+				if(pokemonAleatorio == 1) {
+					pokemonsitos.add(new PokemonTwo(50,50,app));
+					//pokemonsotes.add(new PokemonTwo(2,530,50,app));
+				}
+				if(pokemonAleatorio == 2) {
+					pokemonsitos.add(new PokemonThree(50,50,app));
+					//pokemonsotes.add(new PokemonThree(2,524,45,app));
+				}
+			}
 		 
 	}
 	
