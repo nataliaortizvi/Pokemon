@@ -322,9 +322,10 @@ public class Juego {
 				pantalla = 5;
 				
 			}
-			
+			if (derrotado == false) {
 			brian.pintar();
 			new Thread (brian).start();
+			}
 			
 
 			if(PApplet.dist(ash.getPosX(), ash.getPosY(), brian.getPosX(), brian.getPosY())<50) {
@@ -559,15 +560,27 @@ public class Juego {
 				app.image(pokebola,718,412,65,65);
 			}
 				evvy.pintarAdelante();
-				if (salir == true) {
-					app.image(exit,17, 11);
-				}
+				
+			
 				
 			if (derrotado == true) {
-				brian.derrotado();
-				salir = true;
+				pantalla = 8;
+				
 			}
+				break;
 			
+		case 8:  
+			
+			app.image(pantBatalla,0,0,800,500);
+			brian.derrotado();
+			app.image(exit,17, 11);
+			salir = true;
+
+			if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
+				app.image(exit,15, 11,120,70);
+			}
+			break;
+		
 			
 		}
 			
@@ -933,15 +946,23 @@ public class Juego {
 				//System.out.println(pokemonsitos.get(j).getVida());
 				//System.out.println(mios.get(i).getAtaque());
 				}
-				if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
+				
+				}
+			break;
+				
+			
+		case 8: 
+			//pantalla derrotado el malo
+			
+			
+			
+			if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
 					reiniciar();
 					pantalla = 4;
-				}
-				
+			
+			break;
 			}
-		
 		}
-		
 	}
 	
 	
