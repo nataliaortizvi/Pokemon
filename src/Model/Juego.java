@@ -453,6 +453,7 @@ public class Juego {
 			
 				if (tortu == true || charman == true || planta == true) {
 					for (int i = 0; i < pokedex.size(); i++) {
+						
 						for (int j = 0; j < pokemonsitos.size(); j++) {
 							pokedex.get(i).pintarAdelanteChiqui();
 							
@@ -775,21 +776,23 @@ public class Juego {
 						
 						pokebolaUsada = true;
 						
-							for (int l = 0; l < 1; l++) {
+							for (int l = 0; l < 2; l++) {
 								
 								if (pokemonsitos.get(i).getTipo() == 1) {
-									pokedex.add(new PokemonOne(438,(i*80)+202, app));
+									pokedex.add(new PokemonOne(438,(l*80)+202, app));
 								} 
 								
 								if (pokemonsitos.get(i).getTipo() == 2) {
-									pokedex.add(new PokemonTwo(438,(i*80)+202, app));
+									pokedex.add(new PokemonTwo(438,(l*80)+202, app));
 								}
 								
 								if (pokemonsitos.get(i).getTipo() == 3) {
-									pokedex.add(new PokemonThree(438,(i*80)+202, app));
+									pokedex.add(new PokemonThree(438,(l*80)+202, app));
 								}
 							
 						}
+							
+							System.out.println(pokedex);
 						
 						
 						
