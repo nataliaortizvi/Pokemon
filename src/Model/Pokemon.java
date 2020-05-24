@@ -59,7 +59,10 @@ public abstract class Pokemon implements Runnable{
 	}
 	
 	public void serAtacado() {
-		this.vida -= 15;
+		if(this.vida > 10) {
+			
+			this.vida -= 15;
+		}
 	}
 	
 	

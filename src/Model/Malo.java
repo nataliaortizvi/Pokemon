@@ -21,7 +21,7 @@ public class Malo extends Personaje implements Runnable {
 		cambiarMalo = 1;
 	}
 	public void derrotado () {
-		app.image(mensajeMalo,40,110,700,380);
+		app.image(mensajeMalo,40,80,700,380);
 	}
 	
 	public void pintar () {
