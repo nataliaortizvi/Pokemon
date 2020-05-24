@@ -10,9 +10,9 @@ public class Bueno extends Personaje implements Runnable{
 	PImage perPerfilDer;
 	int cambiar;
 	int dir;
-
+	boolean capturado;
 	int movPokeG;
-	PImage pokebolita, capturacion;
+	PImage pokebolita;
 	
 
 	public Bueno ( int posX, int posY, PApplet app) {
@@ -20,11 +20,10 @@ public class Bueno extends Personaje implements Runnable{
 		super (posX, posY,app);
 		this.vel = 50;
 		this.pokebolita = app.loadImage("images/pokebola.png");
-		this.capturacion = app.loadImage("images/capturaste.png");
-		
+		//this.capturacion = app.loadImage("images/capturaste.png");
+		this.capturado = false;
 		
 		cambiar = 1;
-	
 		
 		perFrente = app.loadImage("images/buenoFront.png");
 		perBack = app.loadImage("images/buenoBack.png");
@@ -37,17 +36,17 @@ public class Bueno extends Personaje implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(3000);
-		//	atrapacionLograda();
-			//System.out.println("holi");
+			Thread.sleep(4000);
+			atrapacionLograda();
+			System.out.println("holi");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-			
 		}
 	}
 	
 	public void atrapacionLograda() {
-		app.image(this.capturacion,50,190, 700,100);
+		//app.image(this.capturacion,50,190, 700,100);
+		capturado = true;
 	}
 	
 	public void atrapacion() {
@@ -110,6 +109,30 @@ public class Bueno extends Personaje implements Runnable{
 	}
 	
 
+
+	public boolean isCapturado() {
+		return capturado;
+	}
+
+	public int getMovPokeG() {
+		return movPokeG;
+	}
+
+	public PImage getPokebolita() {
+		return pokebolita;
+	}
+
+	public void setCapturado(boolean capturado) {
+		this.capturado = capturado;
+	}
+
+	public void setMovPokeG(int movPokeG) {
+		this.movPokeG = movPokeG;
+	}
+
+	public void setPokebolita(PImage pokebolita) {
+		this.pokebolita = pokebolita;
+	}
 
 	public PImage getPerFrente() {
 		return perFrente;

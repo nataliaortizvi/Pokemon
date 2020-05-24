@@ -47,7 +47,7 @@ public class Juego {
 	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige,pokeSalir, 
 
 		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF, pokebola,escribeNombre,
-		   ataqueR, superAtaqueR, exit;
+		   ataqueR, superAtaqueR, exit, captura;
 		   
 
 	ControlP5 control;
@@ -111,7 +111,7 @@ public class Juego {
 		pokeSalir = app.loadImage("images/pokeSalir.png");
 		pokebola = app.loadImage("images/pokebola.png");
 		exit = app.loadImage("images/exit.png");
-
+		captura = app.loadImage("images/capturaste.png");
 		
 		escribeNombre = app.loadImage("images/escribeNombre.png");
 
@@ -226,8 +226,6 @@ public class Juego {
 				app.image(inicioBlanco,230,407,340,50);
 			}
 			
-			
-			
 			break;
 		case 1:
 			//registro
@@ -242,14 +240,10 @@ public class Juego {
 			
 			if(escribaNombre == true) {
 				
-				app.image(escribeNombre,65 ,365,350,70);
+				app.image(escribeNombre,65,385,350,50);
 				
 			}
-			
-			
-			
-			
-			
+					
 			break;
 		case 2:
 			//lab
@@ -257,16 +251,16 @@ public class Juego {
 			control.hide();
 			if(app.mouseX > 360 && app.mouseX < 480 && app.mouseY > 195 && app.mouseY <260) {
 				app.image(pokebolita,350,195,50,50);
-				app.image(pokebolita,353+45,195,50,50);
+				app.image(pokebolita,353+43,195,50,50);
 				app.image(pokebolita,353+45+45,195,50,50);
 			}
 			
 			
 			
 			perso.pintar();
-			if(PApplet.dist(perso.getPosX(), perso.getPosY(),400, 250)<100) {
+			if(PApplet.dist(perso.getPosX(), perso.getPosY(),400, 250) < 50) {
 				app.image(pokebolita,350,195,50,50);
-				app.image(pokebolita,353+45,195,50,50);
+				app.image(pokebolita,353+43,195,50,50);
 				app.image(pokebolita,353+45+45,195,50,50);
 			}
 			
@@ -417,14 +411,21 @@ public class Juego {
 			
 			for(int i = 0; i < pokemonsitos.size(); i++) {
 				pokemonsitos.get(i).pintarAdelante();
-				if(pokebolaUsada == true&&usarPokebola == true) {
-					ash.atrapacion();
+				if(pokebolaUsada == true && usarPokebola == true) {
+				
 					//ash.atrapacionLograda();
 					//new Thread (ash).start();
 				//	ash.atrapacionLograda();
+					
 					new Thread (ash).start();
+					ash.atrapacion();
+					if(ash.isCapturado() == true) {
+						app.image(this.captura,50,190, 700,100);
+					}
 				}
 			}
+			
+			
 			
 			if (salir == true) {
 				app.image(exit,17, 11);
@@ -665,9 +666,11 @@ public class Juego {
 			//ATAQUE
 			if(app.mouseX > 367 && app.mouseX < 485 && app.mouseY > 417 && app.mouseY <477) {
 				
+				if(mios.get(j).getVida() > 10) {
 				mios.get(j).isEstaEnBatalla();
 				mios.get(j).setEstaEnBatalla(true);
 				new Thread (mios.get(j)).start();
+				}
 				
 				if (pokemonsitos.get(i).getVida() > 20) {
 				pokemonsitos.get(i).setVida((pokemonsitos.get(i).getVida())-mios.get(j).getAtaque());
@@ -708,10 +711,14 @@ public class Juego {
 						if (pokemonsitos.get(i).getVida() > 20) {
 							if(usado == true) {
 						pokemonsitos.get(i).setVida((pokemonsitos.get(i).getVida())-50);
+						
+						if(mios.get(j).getVida() > 10) {
 						mios.get(j).isEstaEnBatalla();
 						mios.get(j).setEstaEnBatalla(true);
 						
 						new Thread (mios.get(j)).start();
+						}
+						
 						usado = false;
 						
 						if(pokemonsitos.get(i).getVida() <= 100) {
@@ -763,9 +770,11 @@ public class Juego {
 				for(int i = 0; i < pokemonsitos.size(); i++) {
 			if(app.mouseX > 367 && app.mouseX < 485 && app.mouseY > 417 && app.mouseY <477) {
 			
+				if(mios.get(j).getVida() > 10) {
 				mios.get(j).isEstaEnBatalla();
 				mios.get(j).setEstaEnBatalla(true);
 				new Thread (mios.get(j)).start();
+				}
 				
 				if (evvy.getVida() > 10) {
 					
@@ -781,7 +790,7 @@ public class Juego {
 				if(evvy.getVida() <= 100) {
 				evvy.setR(242);
 				evvy.setG(187);
-			evvy.setB(34);
+				evvy.setB(34);
 				}
 				
 				if(evvy.getVida() <= 30) {
@@ -804,10 +813,13 @@ public class Juego {
 						if (evvy.getVida() > 20) {
 							if(usado == true) {
 						evvy.setVida((evvy.getVida())-50);
+						
+						if(mios.get(j).getVida() > 10) {
 						mios.get(j).isEstaEnBatalla();
 						mios.get(j).setEstaEnBatalla(true);
 						
 						new Thread (mios.get(j)).start();
+						}
 						usado = false;
 						
 						if(pokemonsitos.get(i).getVida() <= 100) {

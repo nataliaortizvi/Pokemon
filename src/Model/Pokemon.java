@@ -7,17 +7,13 @@ public abstract class Pokemon implements Runnable{
 	String nom;
 	int tipo;
 	int posicion;
-	
-	
 	int nivel;
 	int posX;
 	int posY;
 	int ataque;
 	int vida, vel, dir;
 	PApplet app;
-	
 	boolean estaEnBatalla;
-	
 	int r,g,b;
 	
 	public Pokemon(int posX, int posY, PApplet app) {
@@ -29,7 +25,6 @@ public abstract class Pokemon implements Runnable{
 		this.vida = 163;
 		this.dir = 1;
 		this.estaEnBatalla = false;
-		
 		this.r = 89;
 		this.g = 210;
 		this.b = 129;
@@ -40,18 +35,17 @@ public abstract class Pokemon implements Runnable{
 		
 		if(estaEnBatalla == true) {
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			serAtacado();
 			//System.out.println("holi");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			
+			}
 		}
-		}
-		
 	}
 	
-	
+	//METODOS
 	public void pintarAdelante() {
 		
 	}
@@ -68,22 +62,19 @@ public abstract class Pokemon implements Runnable{
 		this.vida -= 15;
 	}
 	
-	//metodos
-		public void mover() {
+	
+	public void mover() {
 			if(this.dir == 1) {
 				this.posX += this.vel;
-				
 				if(this.posX > 280) {
 					this.dir = 2;
 				}
-				
 				if(this.posX < 10) {
 					this.dir = 2;
 				}
 			}
 			if(this.dir == 2) {
 				this.posY += this.vel;
-				
 				if(this.posY >180) {
 					this.dir = 1;
 					this.vel *= -1;
@@ -93,79 +84,52 @@ public abstract class Pokemon implements Runnable{
 					this.vel *= -1;
 				}
 			}
-			
-			
-			
-			
 		}
+		
 	
 	public boolean isEstaEnBatalla() {
 			return estaEnBatalla;
-		}
+	}
 
 	public void setEstaEnBatalla(boolean estaEnBatalla) {
 			this.estaEnBatalla = estaEnBatalla;
-		}
+	}
 
 	public int getR() {
 		return r;
 	}
 
-
-
 	public int getG() {
 		return g;
 	}
-
-
-
+	
 	public int getB() {
 		return b;
 	}
-
-
 
 	public void setR(int r) {
 		this.r = r;
 	}
 
-
-
 	public void setG(int g) {
 		this.g = g;
 	}
-
-
 
 	public void setB(int b) {
 		this.b = b;
 	}
 
-
-
 	public int getTipo() {
 		return tipo;
 	}
-
-
-
-	
-	
-	
-	
-	
-	
 
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
 	
-	
 	public String getNom() {
 		return nom;
 	}
-
-	
 
 	public int getPosicion() {
 		return posicion;

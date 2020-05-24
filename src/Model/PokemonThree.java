@@ -11,7 +11,7 @@ public class PokemonThree extends Pokemon{
 			
 			this.nom = "Snivy";
 			this.nivel = 1;
-			this.ataque = 10;
+			this.ataque = 15;
 			
 			snivyFrente = app.loadImage("images/snivy.png");
 			snivyBack = app.loadImage("images/snivyBack.png");
