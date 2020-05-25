@@ -24,6 +24,10 @@ public class ControllerC {
 	public void iniciarTeclado() {
 		jueguito.teclado();
 	}
+	
+	public void sortListController (char c) {
+		jueguito.sortList(c);
+	}
 
 	
 	

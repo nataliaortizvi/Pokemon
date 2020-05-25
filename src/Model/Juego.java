@@ -1,6 +1,7 @@
  package Model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 
 import LaExcepcion.ExceptionNombre;
@@ -14,7 +15,7 @@ public class Juego {
 
 	int pokemonAleatorio;
 
-	boolean pokeelige,charman,planta,tortu,pokedexSalir,derrotado;
+	boolean pokeelige,charman,planta,tortu,pokedexSalir,derrotado, infopoke1, infopoke2, infopoke3;
 
 	PApplet app;
 	
@@ -45,9 +46,8 @@ public class Juego {
 
 	Bueno perso;
 	PImage pantInicio, inicioBlanco, inicioR, pantRegistro, pantLab, pantElige,pokeSalir, 
-
 		   pantCampo, pantBatalla, pantPokedex,aceptar,pokebolita,charmanderF,SnivyF,squirtleF, pokebola,escribeNombre,
-		   ataqueR, superAtaqueR, exit, captura;
+		   ataqueR, superAtaqueR, exit, captura, tortuText, charmaText, snivyText, fondo;
 		   
 
 	ControlP5 control;
@@ -55,10 +55,12 @@ public class Juego {
 	PFont font;
 	Malo brian;
 	
-	LinkedList<Pokemon> pokemonsitos, pokemonsotes;
+	LinkedList<Pokemon> pokemonsitos, pokemonsotes, pokedex;
 	LinkedList<Pokemon> mios;
 	
 	ArrayList <User> jugadores;
+	
+	CompararNombre compararNombre;
 	
 	int pantalla; 
 	boolean seguir, clicR, escribaNombre, salir;
@@ -74,7 +76,7 @@ public class Juego {
 	boolean usarPokebola,pokebolaUsada, superClic, puedeUsar, usado;
 	int movPoke;
 	
-	Bueno ash;
+	Bueno ash, ashPeleador;
 	PokemonFour evvy;
 	
 	int puntos;
@@ -86,6 +88,9 @@ public class Juego {
 		charman = false; 
 		tortu = false;
 		planta = false;
+		infopoke1 = false;
+		infopoke2 = false;
+		infopoke3 = false;
 		
 		 
 		perso = new Bueno(200,300,app);
@@ -93,7 +98,7 @@ public class Juego {
 		SnivyF = app.loadImage("images/snivy.png");
 		squirtleF = app.loadImage("images/squirtle.png");
 
-		
+		compararNombre = new CompararNombre();
 		
 		//imagenes
 		pantInicio= app.loadImage("images/inicio.png");
@@ -117,10 +122,13 @@ public class Juego {
 
 		ataqueR = app.loadImage("images/ataque.png");
 		superAtaqueR = app.loadImage("images/superAtaque.png");
-
+		tortuText = app.loadImage("images/tortuText.png"); 
+		charmaText = app.loadImage("images/charmaText.png");
+		snivyText = app.loadImage("images/snivyText.png");
+		fondo = app.loadImage("images/zona.png");
 		
-
 		//variables juego
+		
 		ash = new Bueno (600, 150, app);
 		evvy = new PokemonFour(2,530,app);
 		
@@ -153,13 +161,17 @@ public class Juego {
 
 		
 
-		System.out.println();
+		//System.out.println();
 		pokemonAleatorio = (int) Math.floor(Math.random()*3);
 		pokemonsitos = new LinkedList<Pokemon>();
 		
 		mios = new LinkedList<Pokemon>();
-	
 		
+		pokedex = new LinkedList <Pokemon>();
+		
+		
+
+	
 		for(int i = 0; i < 1; i++) {
 			if(pokemonAleatorio == 0) {
 				pokemonsitos.add(new PokemonOne(50,50,app));
@@ -173,11 +185,16 @@ public class Juego {
 			if(pokemonAleatorio == 2) {
 				pokemonsitos.add(new PokemonThree(50,50,app));
 				//pokemonsotes.add(new PokemonThree(2,524,45,app));
+
 			}
-		}
 		
 		
+		//System.out.println(pokedex.size());
+		
+		
+		if (derrotado == false) {
 		brian = new Malo(200,300,app);
+		}
 
 		//cosas de registro
 		
@@ -211,7 +228,10 @@ public class Juego {
 		usado = true;
 
 		derrotado = false;
-
+		
+		}
+		
+		
 	}
 	
 	//metodos
@@ -254,9 +274,7 @@ public class Juego {
 				app.image(pokebolita,353+43,195,50,50);
 				app.image(pokebolita,353+45+45,195,50,50);
 			}
-			
-			
-			
+		
 			perso.pintar();
 			if(PApplet.dist(perso.getPosX(), perso.getPosY(),400, 250) < 50) {
 				app.image(pokebolita,350,195,50,50);
@@ -305,8 +323,14 @@ public class Juego {
 			if(app.mouseX > 16 && app.mouseX < 85 && app.mouseY > 415 && app.mouseY <480) {
 				 app.image(pokebola,15,413,70,70);
 		        }  
-			
-			
+			if (derrotado == false) {
+				brian.pintar();
+				new Thread (brian).start();
+				if(PApplet.dist(ash.getPosX(), ash.getPosY(), brian.getPosX(), brian.getPosY())<50) {
+					pantalla = 7;
+						}
+					}	
+			if(pokedex.size() < 4) {
 			for(int i = 0; i < pokemonsitos.size(); i++) {
 			pokemonsitos.get(i).pintarAdelanteChiqui();
 			new Thread (pokemonsitos.get(i)).start();
@@ -315,20 +339,14 @@ public class Juego {
 				pantalla = 5;
 				
 			}
-			if (derrotado == false) {
-			brian.pintar();
-			new Thread (brian).start();
-			}
-			
-
-			if(PApplet.dist(ash.getPosX(), ash.getPosY(), brian.getPosX(), brian.getPosY())<50) {
-				pantalla = 7;
+		
 			}
 		}
 		
 			break;
 		case 5:
 			//batalla
+			
 			control.hide();
 			app.image(pantBatalla,0,0,800,500);
 			movPoke = (int)app.random(80,90);
@@ -354,8 +372,6 @@ public class Juego {
 				app.text("ATAQUE",730,35);
 			}
 			
-			
-			
 			if(puedeUsar == false) {
 				
 			try {
@@ -365,8 +381,7 @@ public class Juego {
 				app.fill(28,82,47);
 				app.textSize(12);
 				app.text(e.getMessage(),410,20);
-				
-			}
+				}
 			}
 			
 			if(puntos >= 65) {
@@ -381,6 +396,8 @@ public class Juego {
 				app.textSize(13);
 				app.text(e.getMessage(),625,16);
 			}
+			
+			
 			
 			//System.out.println(puedeUsar);
 			
@@ -399,10 +416,8 @@ public class Juego {
 				mios.get(j).pintarAtras();
 			}
 	
-			
 			if(usarPokebola == true && pokebolaUsada == false) {
 				app.image(pokebola,706,400,movPoke,movPoke);
-			
 			}
 			
 			if(pokebolaUsada == true) {
@@ -418,19 +433,23 @@ public class Juego {
 					//new Thread (ash).start();
 				//	ash.atrapacionLograda();
 					
-					new Thread (ash).start();
-					ash.atrapacion();
-					if(ash.isCapturado() == true) {
+					ashPeleador.atrapacion();
+					if(ashPeleador.isCapturado() == true) {
+						app.image(fondo,0,0,800,500);
 						app.image(this.captura,50,190, 700,100);
+						if (salir == true) {
+							app.image(exit,17, 11);
+						}
+						if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
+							app.image(exit,14, 10,125,65);
+						}
 					}
 				}
 			}
 			
 			
 			
-			if (salir == true) {
-				app.image(exit,17, 11);
-			}
+			
 			
 			break;
 		case 6:
@@ -444,7 +463,18 @@ public class Juego {
 				app.image(pokeSalir,547,410,250,80);
 			}
 			
-			
+				if (tortu == true || charman == true || planta == true) {
+					for (int i = 0; i < pokedex.size(); i++) {
+						
+						for (int j = 0; j < pokemonsitos.size(); j++) {
+							pokedex.get(i).pintarEnPokedex();
+						}
+					}
+				}
+				
+				
+				
+				
 			break;
 		case 7:
 			//batalla del malo brian
@@ -534,14 +564,14 @@ public class Juego {
 				break;
 			
 		case 8:  
-			
-			app.image(pantBatalla,0,0,800,500);
+			control.hide();
+			app.image(fondo,0,0,800,500);
 			brian.derrotado();
-			app.image(exit,17, 11);
+			app.image(exit,17, 5);
 			salir = true;
 
 			if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
-				app.image(exit,15, 11,120,70);
+				app.image(exit,14, 5,125,65);
 			}
 			break;
 		
@@ -594,8 +624,12 @@ public class Juego {
 				if (seguir == true) {
 					for (int i = 0; i < 1; i++) {
 						jugadores.add(new User (usuario, app));
-						//System.out.println(jugadores);
+						
 						pantalla ++;
+						
+						
+						System.out.println(jugadores);
+						System.out.println(usuario);
 					}
 					
 				}
@@ -647,14 +681,22 @@ public class Juego {
 				
 				for(int j = 0; j < 1; j++) {
 					
-					if(tortu == true) {
-						mios.add(new PokemonTwo(60,85,app));
-					}	
 					if(charman == true) {
 						mios.add(new PokemonOne(60,100,app));
+						pokedex.add(new PokemonOne (250, 80, app));
+						infopoke1 = true;
 					}
+					
+					if(tortu == true) {
+						mios.add(new PokemonTwo(60,85,app));
+						pokedex.add(new PokemonTwo(250, 80, app));
+						infopoke2 = true;
+					}	
+				
 					if(planta == true) {
 						mios.add(new PokemonThree(95,140,app));
+						pokedex.add(new PokemonThree(250, 80, app));
+						infopoke3 = true;
 					}
 				}
 				pantalla  ++;
@@ -673,105 +715,193 @@ public class Juego {
 		case 5:
 			//batalla
 			
+/////////////for que recorre los mios y los villanos////////////////////////////////////////////////////////
 			for(int j = 0; j < mios.size(); j++) {
 				for(int i = 0; i < pokemonsitos.size(); i++) {
 					
-			//ATAQUE
+			///////////////////////////////          ATAQUE              ////////////////////////////////
 			if(app.mouseX > 367 && app.mouseX < 485 && app.mouseY > 417 && app.mouseY <477) {
 				
+	///////////////        MI VIDA         ///////////////////
+				//si mi vida es mayor a 10 entonces me atacan
 				if(mios.get(j).getVida() > 10) {
-				mios.get(j).isEstaEnBatalla();
 				mios.get(j).setEstaEnBatalla(true);
+				//hilo de ser atacado
 				new Thread (mios.get(j)).start();
+				
+				
+				//si mi vida es menor a 120 es amarilla
+				if (mios.get(j).getVida() <= 120) {
+					mios.get(j).setR(242);
+					mios.get(j).setG(187);
+					mios.get(j).setB(34);
 				}
 				
-				if (pokemonsitos.get(i).getVida() > 20) {
+				//si mi vida es menor a 40 es roja
+				if (mios.get(j).getVida() <= 40) {
+					mios.get(j).setR(242);
+					mios.get(j).setG(187);
+					mios.get(j).setB(34);
+				}
+			}
+				
+	///////////////        VIDA VILLANOS        ///////////////////
+				//si la vida de los villanos es mayor a 20 los ataco
+				if (pokemonsitos.get(i).getVida() > 10) {
 				pokemonsitos.get(i).setVida((pokemonsitos.get(i).getVida())-mios.get(j).getAtaque());
 				
+				//si los puntos son menos de 65 entonces le sumo
 				if(puntos < 65) {
 				puntos += 30;
 				}
-			}
-		}
-			
+				
 				//CAMBIOS DE COLOR EN LA BARRA DE VIDA
-				if(pokemonsitos.get(i).getVida() <= 100) {
+				if(pokemonsitos.get(i).getVida() <= 120 ) {
 				pokemonsitos.get(i).setR(242);
 				pokemonsitos.get(i).setG(187);
 				pokemonsitos.get(i).setB(34);
 				}
 				
-				if(pokemonsitos.get(i).getVida() <= 30) {
+				if(pokemonsitos.get(i).getVida() <= 40) {
 				pokemonsitos.get(i).setR(242);
 				pokemonsitos.get(i).setG(98);
 				pokemonsitos.get(i).setB(34);
 				}
+			}
+		}
+///////////////////////////////          CIERRE ATAQUE              ////////////////////////////////
+		
+			
 				
-				if(pokemonsitos.get(i).getVida() < 70) {
+			///////////////        POKEBOLA        ///////////////////
+			
+				//si la vida de los villanos es menor a 120 se activa mi pokebola
+				if(pokemonsitos.get(i).getVida() < 70 || mios.get(i).getVida() <= 120) {
 					usarPokebola = true;
+								
+					//una vez activada se puede hacer clic
 					if(app.mouseX >706 && app.mouseX < 791 && app.mouseY > 400 && app.mouseY < 485) {
-						pokebolaUsada = true;
-					}
-				}
-				
-				
-				//SUPER ATAQUE
-				if(app.mouseX > 501 && app.mouseX < 700 && app.mouseY > 417 && app.mouseY <477) {
-					superClic = true;
-					
-					
-					if(puedeUsar == true) {
-						if (pokemonsitos.get(i).getVida() > 20) {
-							if(usado == true) {
-						pokemonsitos.get(i).setVida((pokemonsitos.get(i).getVida())-50);
+
+							ashPeleador = new Bueno(350,400,app);
+							
+						new Thread (ashPeleador).start();
 						
+						
+						//si se hace clic se pinta la pokebola grande
+						pokebolaUsada = true;
+
+						ash.setMato(true);
+
+
+
+						//cuando se unde la pokebola, se agrega el villano al pokedex
+							for (int l = 0; l < 1; l++) {
+								if (pokemonsitos.get(i).getTipo() == 1) {
+									pokedex.add(new PokemonOne(250,pokedex.size()*(90)+80, app));
+								} 
+								
+								if (pokemonsitos.get(i).getTipo() == 2) {
+									pokedex.add(new PokemonTwo(250,pokedex.size()*(90)+80, app));
+								}
+								
+								if (pokemonsitos.get(i).getTipo() == 3) {
+									pokedex.add(new PokemonThree(250,pokedex.size()*(90)+80, app));
+
+								}
+							}
+						}
+
+							
+							System.out.println(pokedex);
+						
+						
+						
+						
+
+					}
+				///////////////        CIERRE POKEBOLA       ///////////////////
+				
+				
+				
+				////////////////////////////////          SUPER ATAQUE              ////////////////////////////////
+				if(app.mouseX > 501 && app.mouseX < 700 && app.mouseY > 417 && app.mouseY <477) {
+					superClic = true; 
+					
+				///////////////     si los puntos son 65      ///////////////////
+				if(puedeUsar == true) { 
+										
+				//solo si es la primera vez que se usa se puede usar
+				if(usado == true) { 
+						
+						///////////////        MI VIDA         ///////////////////
+						//si mi vida es mayor a 10 entonces me atacan
 						if(mios.get(j).getVida() > 10) {
 						mios.get(j).isEstaEnBatalla();
 						mios.get(j).setEstaEnBatalla(true);
-						
+						//hilo de ser atacado
 						new Thread (mios.get(j)).start();
+						
+						//si mi vida es menor a 120 es amarilla
+						if (mios.get(j).getVida() <= 120) {
+							mios.get(j).setR(242);
+							mios.get(j).setG(187);
+							mios.get(j).setB(34);
 						}
 						
-						usado = false;
+						//si mi vida es menor a 40 es roja
+						if (mios.get(j).getVida() <= 40) {
+							mios.get(j).setR(242);
+							mios.get(j).setG(187);
+							mios.get(j).setB(34);
+							}
+						}
 						
-						if(pokemonsitos.get(i).getVida() <= 100) {
+						
+						
+						///////////////        VIDA VILLANOS        ///////////////////
+						//si la vida de los villanos es mayor a 20 los ataco
+						if (pokemonsitos.get(i).getVida() > 20) {
+						pokemonsitos.get(i).setVida((pokemonsitos.get(i).getVida())-50);
+						
+						//CAMBIOS DE COLOR EN LA BARRA DE VIDA
+						if(pokemonsitos.get(i).getVida() <= 120) {
 							pokemonsitos.get(i).setR(242);
 							pokemonsitos.get(i).setG(187);
 							pokemonsitos.get(i).setB(34);
-							}
+						}
 							
-							if(pokemonsitos.get(i).getVida() <= 30) {
+						if(pokemonsitos.get(i).getVida() <= 40) {
 							pokemonsitos.get(i).setR(242);
 							pokemonsitos.get(i).setG(98);
 							pokemonsitos.get(i).setB(34);
-							}
+								}
 							}
 						}
+				
+						usado = false;
 					}
 				}
-				
-				
+///////////////////////////////          CIERRE ATAQUE              ////////////////////////////////
 				//System.out.println(pokemonsitos.get(j).getVida());
 				//System.out.println(mios.get(i).getAtaque());
 				}
-				
-				
 			}
-		
+////////////cierre for mios y villanos////////////////////////////////////////////////////////
+			
+		if (pokebolaUsada == true) {
+			
 			if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
 				reiniciar();
 				pantalla = 4;
+				
 			}
-			
-			
-	
-			
+		}
+		
 			break;
 		case 6:
 			//pokedex
 			if(app.mouseX > 580 && app.mouseX < 755 && app.mouseY > 420 && app.mouseY <488 ) {
 				pantalla  =4;
-				
 			}
 			
 			break;
@@ -782,7 +912,19 @@ public class Juego {
 			for(int j = 0; j < mios.size(); j++) {
 				for(int i = 0; i < pokemonsitos.size(); i++) {
 			if(app.mouseX > 367 && app.mouseX < 485 && app.mouseY > 417 && app.mouseY <477) {
-			
+				
+				if (mios.get(j).getVida() <= 120) {
+					mios.get(j).setR(242);
+					mios.get(j).setG(187);
+					mios.get(j).setB(34);
+				}
+				
+				if (mios.get(j).getVida() <= 40) {
+					mios.get(j).setR(242);
+					mios.get(j).setG(187);
+					mios.get(j).setB(34);
+				}
+				
 				if(mios.get(j).getVida() > 10) {
 				mios.get(j).isEstaEnBatalla();
 				mios.get(j).setEstaEnBatalla(true);
@@ -793,11 +935,10 @@ public class Juego {
 					
 					if(puntos < 65) {
 						puntos += 30;
-						}
+					}
 					
 				evvy.setVida((evvy.getVida())-mios.get(j).getAtaque());
-			
-				}
+					}
 				}
 				
 				if(evvy.getVida() <= 100) {
@@ -831,6 +972,18 @@ public class Juego {
 						mios.get(j).isEstaEnBatalla();
 						mios.get(j).setEstaEnBatalla(true);
 						
+						if (mios.get(j).getVida() <= 120) {
+							mios.get(j).setR(242);
+							mios.get(j).setG(187);
+							mios.get(j).setB(34);
+						}
+						
+						if (mios.get(j).getVida() <= 40) {
+							mios.get(j).setR(242);
+							mios.get(j).setG(187);
+							mios.get(j).setB(34);
+						}
+						
 						new Thread (mios.get(j)).start();
 						}
 						usado = false;
@@ -861,12 +1014,11 @@ public class Juego {
 			
 		case 8: 
 			//pantalla derrotado el malo
-			
-			
-			
+		
 			if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
-					reiniciar();
+					reiniciarUno();
 					pantalla = 4;
+					derrotado = true;
 			
 			break;
 			}
@@ -880,6 +1032,7 @@ public class Juego {
 			
 			switch (pantalla) {
 			case 2:
+				
 				if (app.keyCode == app.UP) {
 					if (this.mapa1[yLab - moveLab][xLab] == 0) {
 						yLab -= moveLab;
@@ -913,86 +1066,190 @@ public class Juego {
 				break;
 			case 4:
 				
-				if (app.keyCode == app.DOWN) {
-					if (this.mapa[yLogica + seMovio][xLogica] == 0) {
-						yLogica += seMovio;
-						ash.moverAba();
-					} 
+				//EXCEPCION RUNTIME ((INDEX OUT OF BOUNDS EXCEPTION)
+                try {
+                	if (app.keyCode == app.DOWN) {
+    					if (this.mapa[yLogica + seMovio][xLogica] == 0) {
+    						yLogica += seMovio;
+    						ash.moverAba();
+    					} 
+    				}
+    				
+    				if (app.keyCode == app.UP) {	
+    					if (this.mapa[yLogica - seMovio][xLogica] == 0) {
+    						yLogica -= seMovio;
+    						ash.moverArr();
+    					}
+    				}
+    				
+    				if (app.keyCode == app.LEFT) {
+    					if (this.mapa[yLogica][xLogica - seMovio] == 0) {
+    						xLogica -= seMovio;
+    						ash.moverIzq();
+    					}
+    					
+    				}
+    				
+    				if (app.keyCode == app.RIGHT) {	
+    					if (this.mapa[yLogica][xLogica + seMovio] == 0) {
+    						xLogica += seMovio;
+    						ash.moverDer();
+    					}
+    				}
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println("Limite del mapa");
 				}
 				
-				if (app.keyCode == app.UP) {	
-					if (this.mapa[yLogica - seMovio][xLogica] == 0) {
-						yLogica -= seMovio;
-						ash.moverArr();
-					}
-				}
-				
-				if (app.keyCode == app.LEFT) {
-					if (this.mapa[yLogica][xLogica - seMovio] == 0) {
-						xLogica -= seMovio;
-						ash.moverIzq();
-					}
-					
-				}
-				
-				if (app.keyCode == app.RIGHT) {	
-					if (this.mapa[yLogica][xLogica + seMovio] == 0) {
-						xLogica += seMovio;
-						ash.moverDer();
-					}
-				}
+				break;
 			}
 		}
 		
 	}
 	
+	public void reiniciarUno () {
+		
+			
+			 ash.setPosX(600);
+			 ash.setPosY(150);
+			 xLogica = 12;
+			 yLogica = 4;
+			 salir = false;
+			 ash.setMato(false);
+			 
+			 
+			 for (int i = 0; i < pokemonsitos.size(); i++) {
+				 for (int j = 0; j < mios.size(); j++) {
+					 
+					 puntos = 5;
+					 
+					 pokemonsitos.get(i).setVida(163);			 
+					 pokemonsitos.get(i).setR(0);
+					 pokemonsitos.get(i).setG(218);
+					 pokemonsitos.get(i).setB(124);
+					 
+					 usado = true;
+					 puedeUsar = false;
+					 superClic = false;
+					 
+					 ash.setCapturado(false);
+					 usarPokebola = false;
+					 pokebolaUsada = false;
+					 pokemonsitos.remove();
+					 
+					 mios.get(j).setVida(163);
+					 mios.get(j).setR(0);
+					 mios.get(j).setG(218);
+					 mios.get(j).setB(124);
+					 
+				 	}
+				 }
+				 
+			 if (pokedex.size() < 5) {
+				 
+				 pokemonAleatorio = (int) Math.floor(Math.random()*3);
+				 
+				 for(int i = 0; i < 1; i++) {
+					 if(pokemonAleatorio == 0) {
+						 pokemonsitos.add(new PokemonOne(50,50,app));
+						 //pokemonsotes.add(new PokemonOne(2,540,50,app));
+						 
+					 }
+					 if(pokemonAleatorio == 1) {
+						 pokemonsitos.add(new PokemonTwo(50,50,app));
+						 //pokemonsotes.add(new PokemonTwo(2,530,50,app));
+					 }
+					 if(pokemonAleatorio == 2) {
+						 pokemonsitos.add(new PokemonThree(50,50,app));
+						 //pokemonsotes.add(new PokemonThree(2,524,45,app));
+					 }
+				 }
+			 }
+			 
+
+		}
+	
+	
 	public void reiniciar () {
+		
+		ashPeleador.setMato(false);
+		ash.setMato(true);
 		 ash.setPosX(600);
 		 ash.setPosY(150);
 		 xLogica = 12;
 		 yLogica = 4;
 		 salir = false;
+		 ash.setMato(false);
+		 
+		 
 		 for (int i = 0; i < pokemonsitos.size(); i++) {
-			 pokemonsitos.get(i).setVida(163);
-		
-			 pokemonsitos.get(i).setR(0);
-			 pokemonsitos.get(i).setG(218);
-			 pokemonsitos.get(i).setB(124);
+			 for (int j = 0; j < mios.size(); j++) {
+				 
+				 puntos = 5;
+				 
+				 pokemonsitos.get(i).setVida(163);			 
+				 pokemonsitos.get(i).setR(0);
+				 pokemonsitos.get(i).setG(218);
+				 pokemonsitos.get(i).setB(124);
+				 
+				 usado = true;
+				 puedeUsar = false;
+				 superClic = false;
+				 
+				 ash.setCapturado(false);
+				 usarPokebola = false;
+				 pokebolaUsada = false;
+				 pokemonsitos.remove();
+				 
+				 mios.get(j).setVida(163);
+				 mios.get(j).setR(0);
+				 mios.get(j).setG(218);
+				 mios.get(j).setB(124);
+				 
+			 	}
+			 }
 			 
-			 if(pokemonsitos.get(i).getVida() <= 100) {
-					pokemonsitos.get(i).setR(242);
-					pokemonsitos.get(i).setG(187);
-					pokemonsitos.get(i).setB(34);
-					}
-					
-					if(pokemonsitos.get(i).getVida() <= 30) {
-						pokemonsitos.get(i).setR(242);
-						pokemonsitos.get(i).setG(98);
-						pokemonsitos.get(i).setB(34);
-						}
-			 usarPokebola = false;
-			 pokebolaUsada = false;
-			 pokemonsitos.remove();
+		 if (pokedex.size() < 5) {
 			 
+			 pokemonAleatorio = (int) Math.floor(Math.random()*3);
+			 
+			 for(int i = 0; i < 1; i++) {
+				 if(pokemonAleatorio == 0) {
+					 pokemonsitos.add(new PokemonOne(50,50,app));
+					 //pokemonsotes.add(new PokemonOne(2,540,50,app));
+					 
+				 }
+				 if(pokemonAleatorio == 1) {
+					 pokemonsitos.add(new PokemonTwo(50,50,app));
+					 //pokemonsotes.add(new PokemonTwo(2,530,50,app));
+				 }
+				 if(pokemonAleatorio == 2) {
+					 pokemonsitos.add(new PokemonThree(50,50,app));
+					 //pokemonsotes.add(new PokemonThree(2,524,45,app));
+				 }
+			 }
 		 }
-		 pokemonAleatorio = (int) Math.floor(Math.random()*3);
 		 
-		 for(int i = 0; i < 1; i++) {
-				if(pokemonAleatorio == 0) {
-					pokemonsitos.add(new PokemonOne(50,50,app));
-					//pokemonsotes.add(new PokemonOne(2,540,50,app));
-					
-				}
-				if(pokemonAleatorio == 1) {
-					pokemonsitos.add(new PokemonTwo(50,50,app));
-					//pokemonsotes.add(new PokemonTwo(2,530,50,app));
-				}
-				if(pokemonAleatorio == 2) {
-					pokemonsitos.add(new PokemonThree(50,50,app));
-					//pokemonsotes.add(new PokemonThree(2,524,45,app));
-				}
+
+	}
+	
+	public void sortList (char c) {
+		
+		switch (c) {
+		case 'n':
+			Collections.sort(pokedex);
+			for (int i = 0; i < pokedex.size(); i++) {
+				pokedex.get(i).setPosY(i*80+70);					
 			}
-		 
+			break;
+		case 'p':
+			Collections.sort(pokedex, compararNombre);
+			for (int i = 0; i < pokedex.size(); i++) {
+				pokedex.get(i).setPosY(i*80+70);					
+			}
+			break;
+		
+		}
+
 	}
 	
 	
@@ -1017,7 +1274,10 @@ public class Juego {
 	public void laExceptionAtaqueUsado (boolean a) throws ExceptionNombre {
 		if (a == false) {
 			throw new ExceptionNombre("Solo tienes 1 Super ataque");
-		} 
+		
+		}
+		
+	
 		
 	}
 	

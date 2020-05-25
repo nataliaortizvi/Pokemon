@@ -5,6 +5,7 @@ public class PokemonThree extends Pokemon{
 		
 	PImage snivyFrente;
 	PImage snivyBack;
+	PImage snivyPokedex;
 	
 		public PokemonThree(int posX, int posY, PApplet app) {
 			super(posX, posY, app);
@@ -12,9 +13,11 @@ public class PokemonThree extends Pokemon{
 			this.nom = "Snivy";
 			this.nivel = 1;
 			this.ataque = 15;
+			this.tipo = 3;
 			
 			snivyFrente = app.loadImage("images/snivy.png");
 			snivyBack = app.loadImage("images/snivyBack.png");
+			snivyPokedex = app.loadImage("images/snivyPokedex.png");
 		}
 		
 		public void pintarAdelante() {
@@ -42,7 +45,7 @@ public class PokemonThree extends Pokemon{
 			app.noStroke();
 			app.rect(506,316,167,17);
 			
-			app.fill(89,210,129);
+			app.fill(this.r, this.g,this.b);
 			app.rect(508,318,this.vida,13);
 			
 			//nivel
@@ -58,6 +61,10 @@ public class PokemonThree extends Pokemon{
 
 		public void pintarAdelanteChiqui() {
 			app.image(snivyFrente, posX, posY,60,70);
+		}
+		
+		public void pintarEnPokedex () {
+			app.image(snivyPokedex, posX, posY);
 		}
 		
 		

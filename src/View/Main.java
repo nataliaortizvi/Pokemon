@@ -43,6 +43,7 @@ public class Main extends PApplet {
 	
 	public void keyPressed() {
 			controllerView.iniciarTeclado();
+			controllerView.sortListController(key);
 		
 	
 	}

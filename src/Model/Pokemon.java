@@ -2,7 +2,7 @@ package Model;
 
 import processing.core.PApplet;
 
-public abstract class Pokemon implements Runnable{
+public abstract class Pokemon implements Runnable, Comparable <Pokemon> {
 	
 	String nom;
 	int tipo;
@@ -58,8 +58,15 @@ public abstract class Pokemon implements Runnable{
 	
 	}
 	
+	public void pintarEnPokedex() {
+		
+	}
+	
 	public void serAtacado() {
-		this.vida -= 15;
+		if(this.vida > 10) {
+			
+			this.vida -= this.ataque;
+		}
 	}
 	
 	
@@ -85,6 +92,10 @@ public abstract class Pokemon implements Runnable{
 				}
 			}
 		}
+	
+	public int compareTo (Pokemon nuevo) {
+		return this.tipo - nuevo.getTipo();
+	}
 		
 	
 	public boolean isEstaEnBatalla() {

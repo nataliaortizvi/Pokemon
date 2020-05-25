@@ -8,17 +8,19 @@ public class PokemonTwo extends Pokemon{
 	
 	PImage squirtleFrente;
 	PImage squirtleBack;
+	PImage squirtlePokedex;
 	
 	public PokemonTwo(int posX, int posY, PApplet app) {
 		super(posX, posY, app);
 		
 		this.nom = "Squirtle";
 		this.nivel = 3;
-		this.ataque = 30;
+		this.ataque = 25;
+		this.tipo = 2;
 		
 		squirtleFrente = app.loadImage("images/squirtle.png");
 		squirtleBack = app.loadImage("images/squirtleBack.png");
-		
+		squirtlePokedex = app.loadImage("images/tortuPokedex.png");
 	}
 	
 	public void pintarAdelante() {
@@ -46,7 +48,7 @@ public class PokemonTwo extends Pokemon{
 		app.noStroke();
 		app.rect(506,316,167,17);
 		
-		app.fill(89,210,129);
+		app.fill(this.r, this.g,this.b);
 		app.rect(508,318,this.vida,13);
 		
 		//nivel
@@ -62,6 +64,10 @@ public class PokemonTwo extends Pokemon{
 
 	public void pintarAdelanteChiqui() {
 		app.image(squirtleFrente, posX, posY,60,70);
+	}
+	
+	public void pintarEnPokedex () {
+		app.image(squirtlePokedex, posX, posY);
 	}
 	
 
