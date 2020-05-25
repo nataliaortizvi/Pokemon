@@ -71,9 +71,6 @@ public class Malo extends Personaje implements Runnable {
 	}
 	
 	
-	public void atrapar () {
-		
-	}
 
 
 	public void run() {
