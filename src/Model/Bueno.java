@@ -24,7 +24,7 @@ public class Bueno extends Personaje implements Runnable{
 		this.mato = true;
 		
 		cambiar = 1;
-		
+		mato = true;
 		perFrente = app.loadImage("images/buenoFront.png");
 		perBack = app.loadImage("images/buenoBack.png");
 		perPerfil = app.loadImage("images/buenoperfil.png");
@@ -34,8 +34,10 @@ public class Bueno extends Personaje implements Runnable{
 	
 	@Override
 	public void run() {
+		if(mato == true) {
 		
-		if (mato == true) {
+
+		/*if (mato == true) {
 			
 			try {
 				Thread.sleep(3000);
@@ -43,15 +45,28 @@ public class Bueno extends Personaje implements Runnable{
 				//System.out.println("holi");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
+			}*/
+
+		
+		try {
+			Thread.sleep(3000);
+			atrapacionLograda();
+			//System.out.println("lograda osea que esta true el capturado");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+
 		}
+	}
 	}
 
 	
+
+
 	public void atrapacionLograda() {
 		//app.image(this.capturacion,50,190, 700,100);
 		capturado = true;
 	}
+	
 	
 	public void atrapacion() {
 		this.movPokeG = (int) app.random(190,200);
