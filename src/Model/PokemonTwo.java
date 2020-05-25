@@ -8,6 +8,7 @@ public class PokemonTwo extends Pokemon{
 	
 	PImage squirtleFrente;
 	PImage squirtleBack;
+	PImage squirtlePokedex;
 	
 	public PokemonTwo(int posX, int posY, PApplet app) {
 		super(posX, posY, app);
@@ -19,7 +20,7 @@ public class PokemonTwo extends Pokemon{
 		
 		squirtleFrente = app.loadImage("images/squirtle.png");
 		squirtleBack = app.loadImage("images/squirtleBack.png");
-		
+		squirtlePokedex = app.loadImage("images/tortuPokedex.png");
 	}
 	
 	public void pintarAdelante() {
@@ -63,6 +64,10 @@ public class PokemonTwo extends Pokemon{
 
 	public void pintarAdelanteChiqui() {
 		app.image(squirtleFrente, posX, posY,60,70);
+	}
+	
+	public void pintarEnPokedex () {
+		app.image(squirtlePokedex, posX, posY);
 	}
 	
 
