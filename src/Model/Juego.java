@@ -624,7 +624,7 @@ public class Juego {
 		
 		app.fill(0);
 		app.textSize(10);
-		app.text("x="+ app.mouseX + "y=" + app.mouseY, app.mouseX, app.mouseY);
+		//app.text("x="+ app.mouseX + "y=" + app.mouseY, app.mouseX, app.mouseY);
 		
 		
 	}
@@ -674,7 +674,7 @@ public class Juego {
 						pantalla ++;
 						
 						
-						System.out.println(jugadores);
+						//System.out.println(jugadores);
 						System.out.println(usuario);
 					}
 					
