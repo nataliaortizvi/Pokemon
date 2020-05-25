@@ -597,14 +597,12 @@ public class Juego {
 			
 				
 			if (derrotado == true) {
-				
-				
 				pantalla = 8;
-				
 			}
 				break;
 			
 		case 8:  
+			//brian derrotado
 			control.hide();
 			app.image(fondo,0,0,800,500);
 			brian.derrotado();
@@ -622,8 +620,8 @@ public class Juego {
 			
 		
 		
-		app.fill(0);
-		app.textSize(10);
+		//app.fill(0);
+		//app.textSize(10);
 		//app.text("x="+ app.mouseX + "y=" + app.mouseY, app.mouseX, app.mouseY);
 		
 		
@@ -861,7 +859,7 @@ public class Juego {
 						}
 
 							
-							System.out.println(pokedex);
+							//System.out.println(pokedex);
 						
 						
 						
@@ -1222,9 +1220,7 @@ public class Juego {
 					 }
 				 }
 			 }
-			 
-
-		}
+		 }
 	
 	
 	public void reiniciar () {
