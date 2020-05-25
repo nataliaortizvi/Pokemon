@@ -253,22 +253,7 @@ public class Juego {
 		prenderSonidoCampo = false;
 		}
 		
-	/*	if (prenderSonidoBatalla == true) {
-			sonidoBatalla.amp((float) 0.5);
-			sonidoBatalla.play();
-		} else { sonidoBatalla.stop(); }
-		if(prenderSonidoVictoria == true) {
-			sonidoVictoria.amp((float) 0.5);
-			sonidoVictoria.play();
-		}else { sonidoVictoria.stop(); }
-		if(prenderSonidoCampo == true) {
-			sonidoCampo.amp((float)0.5);
-			sonidoCampo.play();
-		}else { sonidoCampo.stop(); }
-		
-		
-		}*/
-		
+
 		
 	}
 	
@@ -367,8 +352,9 @@ public class Juego {
 				brian.pintar();
 				new Thread (brian).start();
 				if(PApplet.dist(ash.getPosX(), ash.getPosY(), brian.getPosX(), brian.getPosY())<50) {
-					prenderSonidoBatalla=true;
-					prenderSonidoCampo = false;
+					sonidoBatalla.amp((float)0.5);
+					sonidoBatalla.play();
+					sonidoCampo.stop();
 					pantalla = 7;
 						}
 					}	
@@ -611,9 +597,8 @@ public class Juego {
 			
 				
 			if (derrotado == true) {
-				sonidoBatalla.stop();
-				sonidoVictoria.amp((float) 0.5);
-				sonidoVictoria.play();
+				
+				
 				pantalla = 8;
 				
 			}
@@ -1021,9 +1006,7 @@ public class Juego {
 					}
 				
 				if(evvy.getVida() <= 20) {
-					sonidoCampo.stop();
-					sonidoVictoria.amp((float)0.5);
-					sonidoVictoria.play();
+					
 					derrotado = true;
 				
 				}
@@ -1086,9 +1069,9 @@ public class Juego {
 			//pantalla derrotado el malo
 		
 			if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
-				sonidoVictoria.stop();
-					reiniciarUno();
 				
+					reiniciarUno();
+				sonidoBatalla.stop();
 				
 					sonidoCampo.amp((float)0.5);
 					sonidoCampo.play();
