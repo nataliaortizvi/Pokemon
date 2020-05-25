@@ -7,6 +7,7 @@ public class PokemonOne extends Pokemon{
 	
 	PImage charmanderFrente;
 	PImage charmanderBack;
+	PImage charmanderPokedex;
 	
 	public PokemonOne(int posX, int posY, PApplet app) {
 		super(posX, posY, app);
@@ -14,10 +15,11 @@ public class PokemonOne extends Pokemon{
 		this.nom = "Charmander";
 		this.nivel = 2;
 		this.ataque = 20;
+		this.tipo = 1;
 		
 		charmanderFrente = app.loadImage("images/charmander.png");
 		charmanderBack = app.loadImage("images/charmanderBack.png");
-		
+		charmanderPokedex = app.loadImage("images/charmaPokedex.png");
 	}
 	
 	
@@ -62,6 +64,10 @@ public class PokemonOne extends Pokemon{
 
 	public void pintarAdelanteChiqui() {
 		app.image(charmanderFrente,posX, posY,60,70);
+	}
+	
+	public void pintarEnPokedex () {
+		app.image(charmanderPokedex, posX, posY);
 	}
 	
 	
