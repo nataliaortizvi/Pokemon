@@ -1,4 +1,4 @@
-package Model;
+ package Model;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -7,7 +7,6 @@ public class PokemonOne extends Pokemon{
 	
 	PImage charmanderFrente;
 	PImage charmanderBack;
-	PImage charmanderPokedex;
 	
 	public PokemonOne(int posX, int posY, PApplet app) {
 		super(posX, posY, app);
@@ -15,11 +14,10 @@ public class PokemonOne extends Pokemon{
 		this.nom = "Charmander";
 		this.nivel = 2;
 		this.ataque = 20;
-		this.tipo = 1;
 		
 		charmanderFrente = app.loadImage("images/charmander.png");
 		charmanderBack = app.loadImage("images/charmanderBack.png");
-		charmanderPokedex = app.loadImage("images/charmaPokedex.png");
+		
 	}
 	
 	
@@ -30,7 +28,6 @@ public class PokemonOne extends Pokemon{
 		app.rect(306,78,167,17);
 		app.fill(this.r, this.g,this.b);
 		app.rect(308,80,this.vida,13);
-		
 		//nivel
 		app.fill(28,82,47);
 		app.textSize(16);
@@ -49,7 +46,7 @@ public class PokemonOne extends Pokemon{
 		app.noStroke();
 		app.rect(506,316,167,17);
 		
-		app.fill(this.r, this.g,this.b);
+		app.fill(89,210,129);
 		app.rect(508,318,this.vida,13);
 		
 		//nivel
@@ -65,11 +62,6 @@ public class PokemonOne extends Pokemon{
 
 	public void pintarAdelanteChiqui() {
 		app.image(charmanderFrente,posX, posY,60,70);
-	}
-	
-	public void pintarEnPokedex () {
-		app.image(charmanderPokedex, posX, posY);
-		
 	}
 	
 	

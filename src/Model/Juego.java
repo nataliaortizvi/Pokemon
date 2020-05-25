@@ -10,14 +10,23 @@ import controlP5.Textfield;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
+import processing.sound.SoundFile;
 
 public class Juego {
 
 	int pokemonAleatorio;
 
-	boolean pokeelige,charman,planta,tortu,pokedexSalir,derrotado, infopoke1, infopoke2, infopoke3;
+	boolean pokeelige,charman,planta,tortu,pokedexSalir,derrotado, infopoke1, infopoke2, infopoke3,prenderSonidoBatalla,prenderSonidoVictoria,prenderSonidoCampo;
+	
+	//sonidos
+	SoundFile sonidoInicio;
+	SoundFile sonidoCampo;
+	SoundFile sonidoBatalla;
+	SoundFile sonidoVictoria;
+	SoundFile sonidoLab;
 
 	PApplet app;
+	
 	
 	//mapa
 	int [][] mapa = { {0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1},
@@ -229,7 +238,36 @@ public class Juego {
 
 		derrotado = false;
 		
+		//cosas de sonidos
+		sonidoInicio = new SoundFile(this.app,"sound/POKEINICIO.mp3");
+		sonidoInicio.amp((float) 0.5);
+		sonidoInicio.play();
+		
+		sonidoBatalla = new SoundFile(this.app,"sound/POKEPELEA.mp3");
+		sonidoVictoria = new SoundFile(this.app,"sound/POKEVICTORIA.mp3");
+		sonidoLab =  new SoundFile(this.app,"sound/POKELAB.mp3");
+		sonidoCampo =  new SoundFile(this.app,"sound/POKEPUEBLO.mp3");
+		
+		prenderSonidoBatalla = false;
+		prenderSonidoVictoria = false;
+		prenderSonidoCampo = false;
 		}
+		
+	/*	if (prenderSonidoBatalla == true) {
+			sonidoBatalla.amp((float) 0.5);
+			sonidoBatalla.play();
+		} else { sonidoBatalla.stop(); }
+		if(prenderSonidoVictoria == true) {
+			sonidoVictoria.amp((float) 0.5);
+			sonidoVictoria.play();
+		}else { sonidoVictoria.stop(); }
+		if(prenderSonidoCampo == true) {
+			sonidoCampo.amp((float)0.5);
+			sonidoCampo.play();
+		}else { sonidoCampo.stop(); }
+		
+		
+		}*/
 		
 		
 	}
@@ -245,6 +283,7 @@ public class Juego {
 			if(app.mouseX > 247 && app.mouseX < 551 && app.mouseY > 414 && app.mouseY < 457) {
 				app.image(inicioBlanco,230,407,340,50);
 			}
+			
 			
 			break;
 		case 1:
@@ -316,6 +355,7 @@ public class Juego {
 			break;
 		case 4: 
 			//campo
+			prenderSonidoCampo = true;
 			control.hide();
 			app.image(pantCampo,0,0,800,500);
 			ash.pintar();
@@ -327,6 +367,8 @@ public class Juego {
 				brian.pintar();
 				new Thread (brian).start();
 				if(PApplet.dist(ash.getPosX(), ash.getPosY(), brian.getPosX(), brian.getPosY())<50) {
+					prenderSonidoBatalla=true;
+					prenderSonidoCampo = false;
 					pantalla = 7;
 						}
 					}	
@@ -337,6 +379,11 @@ public class Juego {
 			
 			if(PApplet.dist(ash.getPosX(), ash.getPosY(), pokemonsitos.get(i).getPosX(), pokemonsitos.get(i).getPosY())<50) {
 				pantalla = 5;
+				sonidoCampo.stop();
+				
+				sonidoBatalla.amp((float)0.5);
+				sonidoBatalla.play();
+				
 				
 			}
 		
@@ -423,6 +470,7 @@ public class Juego {
 			if(pokebolaUsada == true) {
 				app.image(pokebola,718,412,65,65);
 				salir = true;
+				
 			}
 			
 			for(int i = 0; i < pokemonsitos.size(); i++) {
@@ -437,13 +485,18 @@ public class Juego {
 					if(ashPeleador.isCapturado() == true) {
 						app.image(fondo,0,0,800,500);
 						app.image(this.captura,50,190, 700,100);
+						
 						if (salir == true) {
 							app.image(exit,17, 11);
 						}
 						if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
 							app.image(exit,14, 10,125,65);
+							
 						}
+						
+						
 					}
+					
 				}
 			}
 			
@@ -558,6 +611,9 @@ public class Juego {
 			
 				
 			if (derrotado == true) {
+				sonidoBatalla.stop();
+				sonidoVictoria.amp((float) 0.5);
+				sonidoVictoria.play();
 				pantalla = 8;
 				
 			}
@@ -595,6 +651,8 @@ public class Juego {
 
 			if(app.mouseX > 247 && app.mouseX < 551 && app.mouseY > 414 && app.mouseY < 457) {
 				pantalla ++;
+				
+				
 			}
 			
 			break;
@@ -624,6 +682,9 @@ public class Juego {
 				if (seguir == true) {
 					for (int i = 0; i < 1; i++) {
 						jugadores.add(new User (usuario, app));
+						sonidoInicio.stop();
+						sonidoLab.amp((float) 0.5);
+						sonidoLab.play();
 						
 						pantalla ++;
 						
@@ -699,6 +760,9 @@ public class Juego {
 						infopoke3 = true;
 					}
 				}
+				sonidoLab.stop();
+				sonidoCampo.amp((float)0.5);
+				sonidoCampo.play();
 				pantalla  ++;
 				
 			}
@@ -892,6 +956,9 @@ public class Juego {
 			
 			if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
 				reiniciar();
+				sonidoBatalla.stop();
+				sonidoCampo.amp((float) 0.5);
+				sonidoCampo.play();
 				pantalla = 4;
 				
 			}
@@ -954,6 +1021,9 @@ public class Juego {
 					}
 				
 				if(evvy.getVida() <= 20) {
+					sonidoCampo.stop();
+					sonidoVictoria.amp((float)0.5);
+					sonidoVictoria.play();
 					derrotado = true;
 				
 				}
@@ -1016,9 +1086,14 @@ public class Juego {
 			//pantalla derrotado el malo
 		
 			if (app.mouseX > 17 && app.mouseX < 136 && app.mouseY > 11 && app.mouseY < 125) {
+				sonidoVictoria.stop();
 					reiniciarUno();
+				
+				
+					sonidoCampo.amp((float)0.5);
+					sonidoCampo.play();
 					pantalla = 4;
-					derrotado = true;
+				derrotado = true;
 			
 			break;
 			}

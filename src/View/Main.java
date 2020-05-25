@@ -2,13 +2,14 @@ package View;
 
 import Controller.ControllerC;
 import processing.core.PApplet;
+import processing.sound.SoundFile;
 
 public class Main extends PApplet {
 	
 	ControllerC controllerView;
 	
 	
-
+	SoundFile sonidoInicio;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -25,6 +26,10 @@ public class Main extends PApplet {
 	
 	public void setup() {
 		controllerView = new ControllerC(this);
+		
+		//sonidos
+		sonidoInicio = new SoundFile(this,"sound/POKEINICIO.mp3");
+	
 		
 	}
 	
