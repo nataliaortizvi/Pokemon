@@ -695,7 +695,7 @@ public class Juego {
 				
 					if(planta == true) {
 						mios.add(new PokemonThree(95,140,app));
-						pokedex.add(new PokemonThree(250, 80, app));
+						pokedex.add(new PokemonThree(250, 95, app));
 						infopoke3 = true;
 					}
 				}
@@ -1235,6 +1235,7 @@ public class Juego {
 	public void sortList (char c) {
 		
 		switch (c) {
+		//ORDENAR POR TIPO
 		case 'n':
 			Collections.sort(pokedex);
 			for (int i = 0; i < pokedex.size(); i++) {
@@ -1242,6 +1243,7 @@ public class Juego {
 			}
 			break;
 		case 'p':
+			//ORDENAR POR NOMBRE
 			Collections.sort(pokedex, compararNombre);
 			for (int i = 0; i < pokedex.size(); i++) {
 				pokedex.get(i).setPosY(i*80+70);					
